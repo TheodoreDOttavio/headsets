@@ -1,0 +1,36 @@
+#dataentry {
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+  border-radius: 50px 50px 5px 5px;
+  background: #b1b3d4;
+  font-weight: 100;
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+#dataentry h1 {
+  margin: 0;
+  padding: 30px 60px 0 30px;
+  color: #ffffff;
+  font-size: 31px;
+  letter-spacing: -1px;
+  line-height: 27px;
+}
+#dataentry h2 {
+  font-size: 21px;
+  padding: 0 0 0 40px;
+  margin: 0;
+  color: #333333;
+}
+#dataentry input {
+  border-width: 1px;
+  border-radius: 6px;
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: bolder;
+  text-align: center;
+  color: #454545;
+  padding: 5px;
+  margin: 10px 10px 4px 10px;
+}

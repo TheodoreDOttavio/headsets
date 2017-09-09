@@ -1,0 +1,222 @@
+/*
+ *= require_tree .
+*/
+
+@import "bootstrap-sprockets";
+@import "bootstrap-datepicker";
+@import "bootstrap";
+
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700|Poiret+One|Varela+Round);
+
+/* Usage in CSS:
+ * font-family: 'Montserrat', sans-serif;
+ * font-family: 'Poiret One', sans-serif;
+ * font-family: 'Varela Round', sans-serif;
+ */
+
+/* App-Wide Customized CSS */
+
+$grayMediumLight: #eaeaea;
+$grayLighter: #f5f5f5;
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 1.6em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+  font-size: 1em;
+  margin-bottom: 2px;
+  text-align: left;
+  font-weight: 400;
+  font-family: 'Varela Round', sans-serif;
+  color: #1a1a1a;
+}
+
+h3 {
+  font-size: 1em;
+  margin-bottom: 2px;
+  text-align: right;
+  font-weight: 400;
+  font-family: 'Varela Round', sans-serif;
+  color: #1a1a1a;
+}
+
+h4 {
+  font-size: 1em;
+  margin-bottom: 2px;
+  text-align: left;
+  font-weight: 400;
+  font-family: 'Poiret One', sans-serif;
+  color: #000000;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+
+.headtitle {
+  font-size: 1.4em;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: left;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #eeeeee;
+}
+
+.headmenu {
+  font-size: 1em;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #eeeeee;
+}
+
+
+/* General Text CSS */
+.editbold {
+  font-size: .9em;
+  margin-bottom: 1px;
+  font-weight: 400;
+  font-family: 'Varela Round', sans-serif;
+  color: #1a1a1a;
+}
+
+.editlight {
+  font-size: .9em;
+  margin-bottom: 1px;
+  font-weight: 400;
+  font-family: 'Poiret One', sans-serif;
+  color: #000000;
+}
+
+.lt {text-align: left;}
+.rt {text-align: right;}
+.ct {text-align: center;}
+
+.tight {margin: -5px;}
+
+.warningbold {
+  font-size: 1em;
+  margin-bottom: 1px;
+  font-weight: 400;
+  font-family: 'Varela Round', sans-serif;
+  color: #ff0000;
+}
+
+.warninglight {
+  font-size: 1em;
+  margin-bottom: 1px;
+  font-weight: 400;
+  font-family: 'Poiret One', sans-serif;
+  color: #ff0000;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+
+/* Development Mode - The debugger */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}

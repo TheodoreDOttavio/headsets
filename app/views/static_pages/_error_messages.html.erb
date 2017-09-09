@@ -1,0 +1,21 @@
+<!--This error message alert is rendered by several new/edit forms !-->
+
+<% if currentmodel.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      <h2>The form contains <%= pluralize(currentmodel.errors.count, "error") %>:</h2>
+      <% currentmodel.errors.full_messages.each do |msg| %>
+        <h4>* <%= msg %>
+
+        <!--Used only for user login when they have been auto generated !-->
+        <% if msg == "Email has already been taken" %>
+          <br><%= link_to "email password", getautopass_path(:email => currentmodel.email) %>
+          <br>Your account has been auto-generated. Contact Ted (718 678 5933) or the Field operations manager for your temporary password.
+          Then log in and use the settings menu item to change it.<br>&nbsp;<br>
+        <% end %>
+
+        </h4>
+      <% end %>
+    </div>
+  </div>
+<% end %>

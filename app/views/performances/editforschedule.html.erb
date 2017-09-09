@@ -1,0 +1,36 @@
+<% provide(:title, "Edit Show") %>
+<h1>Update Show</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@performance) do |f| %>
+
+      <%= render 'shared/performance_error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <fieldset id="performance-events">
+        <ol>
+        <%= f.fields_for :events do |event| %>
+          <%= render 'event_fields', f: event %>
+        <% end %>
+        </ol>
+        <%= link_to_add_association 'add a show', f, :events,
+          'data-association-insertion-node' => "#performance-events ol",
+          'data-association-insertion-method' => "append",
+          :wrap_object => Proc.new {|events| events.build_user; events },
+          class: "btn btn-medium btn-primary" %>
+      </fieldset>
+
+      <%= f.fields_for :theater do |b| %>
+        <%= f.select :theater_id, Theater.all.map {|e| [e.name, e.id]} %>
+      <% end %>
+
+      <%= f.label :comments, "Additional information, Do the actors run through the theater space..." %>
+      <%= f.text_area :comments %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

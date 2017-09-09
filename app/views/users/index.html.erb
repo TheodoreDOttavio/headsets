@@ -1,0 +1,11 @@
+<% provide(:title, 'All Representatives') %>
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<h1>All Representatives</h1>
+
+<%= will_paginate class: "editbold" %>
+  <%= render @users %>
+<%= will_paginate class: "editbold" %>
+
+</div>
+</div>

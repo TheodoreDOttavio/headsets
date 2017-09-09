@@ -1,0 +1,49 @@
+<% provide(:title, @theater.name) %>
+
+<div align="center">
+<div class="well well-sm" style="width: 50%;">
+<h1><%= @theater.name %></h1>
+
+<div class="row">
+  <div class="col-sm-6 editlight rt"><%= @theater.address %></div>
+  <div class="col-sm-6 editlight lt"><%= @theater.city %>, <%= @theater.state %></div>
+</div>
+<div class="row">
+  <div class="col-sm-6 editbold rt">Phone:</div>
+  <div class="col-sm-6 editlight lt"><%= @theater.phone %></div>
+</div>
+
+<h1>
+   <%= @current %>
+</h1>
+
+<div class="row">
+  <div class="col-sm-3 editbold rt">Enter</div>
+  <div class="col-sm-9 editlight lt"><%= @theater.commentsentrance %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3 editbold rt">Console</div>
+  <div class="col-sm-9 editlight lt"><%= @theater.commentsworklocation %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3 editbold rt">Lock Combo</div>
+  <div class="col-sm-9 editlight lt"><%= @theater.commentslock %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3 editbold rt">Additional Comments</div>
+  <div class="col-sm-9 editlight lt"><%= @theater.comments %></div>
+</div>
+
+<div class="row">
+	<div class="editbold ct"><%= @showlist %></div>
+</div>
+
+<%= link_to "List all Venues", theaters_path, class: "btn btn-sm btn-primary" %>
+<%= link_to "Edit This Venue", edit_theater_path(@theater), class: "btn btn-sm btn-warning" %>
+
+
+</div>
+</div>

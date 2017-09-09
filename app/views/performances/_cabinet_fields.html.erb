@@ -1,0 +1,15 @@
+<div class="controls">
+<div class="row control-group nested-fields">
+  <div class="col-sm-3 editbold rt">Quantity</div>
+  <div class="col-sm-2 editbold rt"><%= f.number_field :quantity %></div>
+  <div class="col-sm-5 editbold lt">
+  	<%= f.fields_for :cabinets do |product_cabinets| %>
+      <%= f.select :product_id,
+        Product.all.collect {|p| [p.name, p.id,
+        {'Device'=>p.name}]},
+        { class: "product-select"} %>
+    <% end %></div>
+  <div class="col-sm-2 editbold lt"><%= link_to_remove_association "remove", f %></div>
+</div>
+
+</div>

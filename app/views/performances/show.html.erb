@@ -1,0 +1,46 @@
+<% provide(:title, @performance.name) %>
+
+<div align="center">
+<div class="well well-sm" style="width: 50%;">
+<h1><%= @performance.name %></h1>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Playing at &nbsp;<%= link_to @performance.theater_name, @performance.theater %></div>
+  <div class="col-sm-3 editlight lt"><%= @performance.theater_address %>, <%= @performance.theater_city %></div>
+  <div class="col-sm-5 editlight rt"><%= @performance.theater_company %></div>
+</div>
+
+<h2>On the web:&nbsp;
+  <a href="http://www.broadway.com/search/?q=<%= @performance.name.gsub(" ","+") %>" target="new">Broadway.com</a>
+</h2>
+
+<h2>Opening Date:&nbsp;
+    <%= @performance.opening.strftime('%b %d, %Y') %>
+<br>Closeing Date:&nbsp;
+  <% if @performance.closeing > DateTime.now()  %>
+    Now Showing
+  <% else %>
+    <%= @performance.closeing.strftime('%b %d, %Y') %>
+  <% end %>
+</h2>
+
+<h2>The Cabinet has:</h2>
+<% @performance.cabinets.each do |c| %>
+<div class="row">
+  <div class="col-sm-2 editbold rt"><%= c.quantity %></div>
+  <div class="col-sm-4 editlight lt"><%= c.product.name.pluralize %></div>
+</div>
+<% end %>
+
+<%= @performance.comments %>
+
+<div class="row">
+  <div class="col-sm-2 editbold lt"><%= link_to "Current Shows", performances_path(current: 1), class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-2 editbold lt"><%= link_to "All Shows", performances_path, class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-4 editbold ct"><%= link_to "Edit " + @performance.name, edit_performance_path(@performance), class: "btn btn-sm btn-warning" %></div>
+  <div class="col-sm-2 editbold lt"><%= link_to "Delete", performance_path(@performance), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger"  %></div>
+  <div class="col-sm-2 editbold lt">&nbsp;</div>
+</div>
+
+</div>
+</div>

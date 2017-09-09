@@ -1,0 +1,30 @@
+<% provide(:title, 'Add Scanned Images to Data') %>
+<div align="center">
+<div class="well well-sm">
+
+<h1>ID the scan</h1>
+
+<%= form_tag("/scanssorting", method: "post") do %>
+
+<div class="row">
+  <div class="col-sm-3 editbold ct"><%= select_tag "placeperformance", options_from_collection_for_select(@performances, "id", "name", @lastperformanceid) %></div>
+  <div class="col-sm-3 editbold lt"><%= select(@object, :placeweek, options_for_select(@completeweeks, @lastweek)) %></div>
+  <div class="col-sm-3 editlight ct">
+    <% @paperformat.each do |o| %>
+      <%= o[0] %>
+      <% if o[1].to_s == @lastformat.to_s then %>
+          <%= radio_button_tag("paperworkformat", o[1], checked = true) %>
+      <% else %>
+          <%= radio_button_tag("paperworkformat", o[1]) %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= hidden_field_tag :placefile, @thisimage %>
+  <div class="col-sm-2 editbold ct"><%= submit_tag 'Attach File', class: "btn btn-sm btn-primary" %></div>
+</div>
+<% end %>
+
+<%= image_tag @thisimage %>
+
+</div>
+</div>

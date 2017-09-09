@@ -1,0 +1,13 @@
+<% provide(:title, 'All Theaters') %>
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<h1>Theaters and Venues</h1>
+
+<%= will_paginate class: "editbold" %>
+  <%= render @theaters %>
+<%= will_paginate class: "editbold" %>
+
+<%= link_to "Create a Venue", new_theater_path(@theater), class: "btn btn-sm btn-primary" if current_user.admin? %>
+
+</div>
+</div>

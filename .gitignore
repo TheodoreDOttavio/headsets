@@ -1,0 +1,30 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+#Rails 4 to heroku - ignore precompiled assets
+public/assets/*.*
+
+#Ignore gem output for clean code
+rails_best_practices_output.html
+
+# Ignore other unneeded files.
+database.yml
+doc/
+*.swp
+*~
+.project
+.metadata
+.DS_Store
+.idea
+.secret
+*.xls
+*.pdf
+*.zip

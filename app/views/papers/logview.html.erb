@@ -1,0 +1,12 @@
+<% provide(:title, 'Review paper logs from the Field') %>
+<div align="center">
+<div class="well well-sm">
+
+<%= render "selectlog", :allweeks => @allweeks, :performances => @performances, :nilobject => @object %>
+
+<% @viewlist.each do |v| %>
+    <%= image_tag v %>
+<% end %>
+
+</div>
+</div>

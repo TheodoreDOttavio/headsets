@@ -1,0 +1,51 @@
+<% provide(:title, 'Add a Theater') %>
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<h1>Add a Theater or Venue</h1>
+
+<%= render 'static_pages/error_messages', :currentmodel => @theater %>
+
+<%= form_for(@theater) do |f| %>
+<div class="row">
+  <div class="col-sm-6 editbold rt">Name</div>
+  <div class="col-sm-6 editbold lt"><%= f.text_field :name %></div>
+</div>
+<div class="row">
+  <div class="col-sm-6 editbold rt">Company</div>
+  <div class="col-sm-6 editbold lt"><%= f.select :company, @companies %></div>
+</div>
+<div class="row">
+  <div class="col-sm-3 editbold rt">Address</div>
+  <div class="col-sm-3 editbold lt"><%= f.text_field :address %></div>
+  <div class="col-sm-3 editbold rt">Phone</div>
+  <div class="col-sm-3 editbold lt"><%= f.telephone_field :phone %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 editbold rt">City</div>
+  <div class="col-sm-2 editbold lt"><%= f.text_field :city %></div>
+  <div class="col-sm-2 editbold rt">State</div>
+  <div class="col-sm-2 editbold lt"><%= f.text_field :state %></div>
+  <div class="col-sm-2 editbold rt">Zip</div>
+  <div class="col-sm-2 editbold lt"><%= f.text_field :zip %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 editbold rt">Rep Entrance:</div>
+  <div class="col-sm-10 editbold lt"><%= f.text_field :commentsentrance %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 editbold rt">Console Location:</div>
+  <div class="col-sm-10 editbold lt"><%= f.text_field :commentsworklocation %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 editbold rt">Lock:</div>
+  <div class="col-sm-10 editbold lt"><%= f.text_field :commentslock %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 editbold rt">Comments:</div>
+  <div class="col-sm-10 editbold lt"><%= f.text_area :comments %></div>
+</div>
+<%= f.submit "Add theater", class: "btn btn-sm btn-primary" %>
+<% end %>
+
+</div>
+</div>

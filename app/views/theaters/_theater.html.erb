@@ -1,0 +1,7 @@
+<div class="row">
+<div class="col-sm-4 editbold lt"><%= link_to theater.name, theater %></div>
+<div class="col-sm-2 editlight lt"><%= theater.company %></div>
+<div class="col-sm-3 editbold ct"><%= theater.nowshowing %></div>
+<div class="col-sm-1 editbold"><%= link_to "Edit", edit_theater_path(theater), class: "btn btn-sm btn-warning" %></div>
+<div class="col-sm-1 editbold"><%= link_to "Delete", theater, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %></div>
+</div>

@@ -1,0 +1,14 @@
+<footer class="footer editlight">
+  <small>
+    Application by Theodore DOttavio
+  </small>
+  <nav>
+    <ul>
+      <li><%= link_to_unless_current "About", about_path, class: "headmenu" %></li>
+      <li><%= link_to_unless_current "Contact", contact_path, class: "headmenu" %></li>
+      <% if signed_in? %>
+        <li><%= link_to "Sign Out", signout_path, data: {method: :delete}, class: "headmenu" %></li>
+      <% end %>
+    </ul>
+  </nav>
+</footer>

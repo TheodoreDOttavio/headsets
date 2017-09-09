@@ -1,0 +1,28 @@
+<% provide(:title, 'Edit a Show') %>
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<h1>Update Product</h1>
+
+<%= render 'static_pages/error_messages', :currentmodel => @product %>
+
+<%= form_for(@product) do |f| %>
+<div class="row">
+  <div class="col-sm-6 editbold rt">Name</div>
+  <div class="col-sm-6 editbold lt"><%= f.text_field :name %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 editbold rt">Options</div>
+  <div class="col-sm-6 editbold lt"><%= f.select :options, @options %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 editbold rt"><h3>Comments</h3></div>
+  <div class="col-sm-6 editbold lt"><h2><%= f.text_field :comments %></h2></div>
+</div>
+
+<%= f.submit "Save changes", class: "btn btn-sm btn-primary" %>
+<% end %>
+
+</div>
+</div>

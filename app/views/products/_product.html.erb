@@ -1,0 +1,5 @@
+<div class="row">
+  <div class="col-sm-7 editbold lt"><%= link_to product.name, product %></div>
+  <div class="col-sm-2 editbold ct"><%= link_to "Edit", edit_product_path(product), class: "btn btn-sm btn-warning" %></div>
+  <div class="col-sm-2 editbold ct"><%= link_to "Delete", product, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-sm btn-danger" %></div>
+</div>

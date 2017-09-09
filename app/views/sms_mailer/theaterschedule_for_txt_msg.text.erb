@@ -1,0 +1,7 @@
+<% @events.each do |e| %>
+<% if e.curtain.strftime('%I').to_f > 4 then %>
+<%= e.curtain.strftime('%a') + " E " %><%= e.user.name[0..10] %>
+<% else %>
+<%= e.curtain.strftime('%a') + " M " %><%= e.user.name[0..10] %>
+<% end %>
+<% end %>

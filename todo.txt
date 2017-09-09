@@ -1,0 +1,40 @@
+ Check Special Services Boolean
+   for Data Entry image view
+   for data entry preview scan/noscan icons
+ Data entry: use scans db to find all weeks available for entry... and add recent weeks
+
+TESTING!!!
+  get basic tests back in and continue with TDD
+  
+Add Availability
+  edit for all users when logged in as admin
+
+Show scheduling
+
+Rip out Distributeds controller and implement it with a hash based model object
+  Pass Distributeds id as an array... simplify all the looping crap
+  use model.update....
+
+Data Archive
+  Save to db directory for db:seed Heroku 8k Distributed
+    Marshal all database tables?
+  Save users with passwords intact
+    A custom archive that uses users.create?
+
+Users
+  Save a signature snapstot
+  Admin needs to be able to set stats of other users without password
+
+Data Entry
+  two partials for infrared and special services
+  check the next week, if no data, add infrared at qty 0
+
+Paperwork and Reports
+  @object for the select tags... it's nil, doesn't work without it. Need to grok this.
+  Default select pdf on weekly exports
+  
+Remove or use Distributed Reports - Data viewer
+
+And keep checking:
+rails_best_practices . -f html
+  The xls sheets make 50+/56 errors. Make a class in models to generate them.

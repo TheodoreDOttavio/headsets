@@ -1,0 +1,96 @@
+<% provide(:title, 'Distributed Data Entry') %>
+<div align="center">
+<div class="well well-sm">
+<h1><%= @performance.name %> for <%= @weekof %></h1>
+
+<%= render 'static_pages/error_messages', :currentmodel => @distributed %>
+
+<div class="row">
+    <div class="col-sm-6 editbold ct" style="position: relative;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    height: 800px;
+    overflow-y: scroll;">
+    <%= image_tag findlog(@mystart, @performance.id, 1) %>
+    <%= image_tag findlog(@mystart, @performance.id, 2) %>
+  </div>
+  <div class="col-sm-6 editbold ct" style="position: relative;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    height: 800px;
+    overflow-y: scroll;">
+
+<%= link_to "Cancel", distributeds_path(mystart: @mystart),
+  class: "btn btn-sm btn-warning" %>
+
+<%= form_tag(:action => 'create', :method => 'post', :id => 1, :mystart => params[:mystart]) %>
+<%= submit_tag 'Save Changes', class: "btn btn-sm btn-primary" %>
+
+  <% @weekofdistributed.each_with_index do |distributed, i| %>
+
+    <%= fields_for "distributed#{i}" do |f| %>
+
+    <% if distributed.curtain.strftime('%a') == 'Mon' %>
+      <% if distributed.eve == false %>
+        <% if distributed.language == 0 %>
+          <div class="row">
+            <div class="col-sm-12 editbold ct">
+              <%= Product.find(distributed.product_id).name %>
+              <% if distributed.product_id == 1 or 6 %>
+                <div class="row">
+                    <div class="col-sm-6 editbold ct">Assign rep to all unknown/TBD with a quantity</div>
+                    <div class="col-sm-6 editlight ct"><%= f.select :weekofrepresentative, options_for_select(@representatives, distributed.representative) %></div>
+                  </div>
+                <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+<div class="row">
+      <div class="col-sm-4 editbold rt">
+      <% if distributed.language.to_i == 0 then %>
+        <% if distributed.eve == true then %>
+          <%= distributed.curtain.strftime('%a E (%m / %d)') %>
+        <% else %>
+          <%= distributed.curtain.strftime('%a M (%m / %d)') %>
+        <% end %>
+      <% end %>
+      </div>
+
+      <%= f.hidden_field :id, value:distributed.id %>
+      <%= f.hidden_field :curtain, value:distributed.curtain %>
+      <%= f.hidden_field :eve, value:distributed.eve %>
+      <%= f.hidden_field :performance_id, value:@performance.id %>
+      <%= f.hidden_field :product_id, value:distributed.product_id %>
+      <%= f.hidden_field :language, value:distributed.language %>
+
+      <% if distributed.language.to_i > 0 then %>
+          <div class="col-sm-4 editbold lt">
+          <%= @language.key(distributed.language.to_i) %>
+          </div>
+      <% end %>
+
+      <div class="col-sm-2 editbold lt tight">
+        <%= f.number_field :quantity, value:distributed.quantity, :tabIndex => 2000 %>
+      </div>
+
+      <% if distributed.product_id == 1 or distributed.product_id == 6 then %>
+        <div class="col-sm-3 editlight ct tight">
+          <%= f.select :representative, options_for_select(@representatives, distributed.representative) %>
+        </div>
+      <% else %>
+        <%= f.hidden_field :representative, value:distributed.representative %>
+      <% end %>
+
+    <% end %>
+</div>
+  <% end %>
+<%= submit_tag 'Save Changes', class: "btn btn-sm btn-primary" %>
+</div></div>
+
+</div>
+</div>

@@ -1,0 +1,116 @@
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<%= form_tag("/printlogs", method: "post") do %>
+<h1>Print a set of Blank Logs</h1>
+
+<div class="row">
+  <div class="col-sm-2 editbold ct"><%= submit_tag 'Download', class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-4 editbold lt"><%= select(@object, :xportweekstart, @upcomingweeks) %></div>
+  <div class="col-sm-3 editlight ct">Download and print a PDF file of Infrared Daily Logs, Special Services Logs, and Translation Services Pickup</div>
+  <div class="col-sm-2 editbold ct">
+  	<%= link_to "Close a Show", performances_path(current: 1), class: "btn btn-sm btn-primary" %>
+  	<br>&nbsp;<br><%= link_to "Create a Show", new_performance_path, class: "btn btn-sm btn-primary" %>
+  </div>
+</div>
+<% end %>
+</div>
+
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+  <%= link_to "Click here to review the State of the Data...", distributeds_path, class: "btn btn-sm btn-primary" %>
+</div>
+</div>
+
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<%= form_tag("/papersweekly", method: "post") do %>
+<h1>Weekly Reports</h1>
+
+<div class="row">
+  <div class="col-sm-2 editbold ct"><%= submit_tag 'Process', class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-3 editbold ct"><%= select(@object, :xportformat, @deliveryformat) %></div>
+  <div class="col-sm-4 editbold lt"><%= select(@object, :xportweekstart, @allweeks) %></div>
+  <div class="col-sm-3 editlight ct">
+    <% @outputformat.each do |o| %>
+      <%= o[0] %>
+      <%= radio_button_tag(:xportas, o[1]) %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+</div>
+
+
+<div class="well well-sm" style="width: 75%;">
+<%= form_tag("/papersmonthly", method: "post") do %>
+<h1>Monthly Reports</h1>
+
+<div class="row">
+  <div class="col-sm-2 editbold ct"><%= submit_tag 'Process', class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-3 editbold ct"><%= select(@object, :xportformat, @deliveryformat) %></div>
+  <div class="col-sm-3 editbold lt"><%= select(@object, :xportmonthstart, @allmonths) %></div>
+  <div class="col-sm-4 editbold lt"><%= select(@object, :xporttheater, @theaters) %></div>
+</div>
+
+<% end %>
+</div>
+
+
+<div class="well well-sm" style="width: 75%;">
+<%= form_tag("/papersspecialservices", method: "post") do %>
+<h1>Special Services</h1>
+
+<div class="row">
+  <div class="col-sm-2 editbold ct"><%= submit_tag 'Process', class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-3 editbold ct"><%= select(@object, :xportformat, @deliveryformat) %></div>
+  <div class="col-sm-4 editbold lt"><%= select(@object, :xportperformance, @ssperformances) %></div>
+  <div class="col-sm-3 editbold ct"><%= select(@object, :xportyear, @showyears) %></div>
+</div>
+
+<% end %>
+</div>
+
+
+<%= render "selectlog", :allweeks => @allweeks, :performances => @performances, :nilobject => @object %>
+
+
+<!--
+<div class="well well-sm" style="width: 75%;">
+<h1>Data Review</h1>
+
+  <div class="row">
+    <div class="col-sm-3 editbold rt">Week of:</div>
+    <div class="col-sm-1 editbold ct">Shows</div>
+    <div class="col-sm-1 editbold ct">Infrared</div>
+    <div class="col-sm-1 editbold ct">Special Services</div>
+    <div class="col-sm-2 editbold ct">Shifts</div>
+    <div class="col-sm-1 editbold rt">Reps</div>
+    <div class="col-sm-1 warningbold lt">TBD</div>
+  </div>
+
+<percent @weektoedit.each do |weekof| percent>
+  <div class="row">
+    <div class="col-sm-3 editbold rt" >
+    	<percent= link_to weekof["showweekof"], distributeds_path(params.merge(:mystart => weekof["startdate"])) percent>
+    </div>
+    <div class="col-sm-1 editlight ct"><percent= weekof["showcount"] percent></div>
+    <percent if weekof["infraredcount"] < weekof["showcount"] then percent>
+      <div class="col-sm-1 warninglight ct">
+    <percent else percent>
+      <div class="col-sm-1 editlight ct">
+    <percent end percent>
+    <percent= weekof["infraredcount"] percent></div>
+    <div class="col-sm-1 editlight ct"><percent= weekof["specialservicescount"] percent></div>
+    <div class="col-sm-2 editlight ct"><percent= weekof["shiftcount"] percent></div>
+    <div class="col-sm-1 editlight rt"><percent= weekof["repcount"] percent></div>
+    <percent if weekof["tbdcount"] != 0 then percent>
+      <div class="col-sm-1 warninglight lt"><percent= weekof["tbdcount"] percent></div>
+    <percent end percent>
+  </div>
+<percent end percent>
+
+</div>
+</div>
+!-->
+
+</div>

@@ -1,0 +1,8 @@
+<% if @events.count == 0 then %>
+No Bookings
+<% else %>
+<% @events.each do |e| %>
+
+<%= e.curtain.strftime('%a') %> <%= e.curtain.strftime('%I:%M%P')[1..5] %> <%= e.performance.name[0..10] %>
+<% end %>
+<% end %>

@@ -1,0 +1,46 @@
+<% provide(:title, 'Add a Show') %>
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+<h1>Add a Show</h1>
+
+<%= render 'static_pages/error_messages', :currentmodel => @performance %>
+
+<%= form_for(@performance) do |f| %>
+  <%= f.hidden_field :closeing, value:'3000-01-01' %>
+  <%= f.hidden_field :opening, value:@anopeningdate %>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Name</div>
+  <div class="col-sm-8 editbold lt"><%= f.text_field :name %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Theater</div>
+  <div class="col-sm-8 editbold lt">
+    <%= f.fields_for :theater do |b| %>
+      <%= f.select :theater_id, Theater.all.map {|e| [e.name, e.id]} %>
+    <% end %>
+  </div>
+</div>
+
+<fieldset id="performance-cabinets" class="editbold">
+  <%= link_to_add_association 'add product', f, :cabinets,
+    'data-association-insertion-node' => "#performance-cabinets",
+    'data-association-insertion-method' => "append",
+    :wrap_object => Proc.new {|cabinets| cabinets.build_product; cabinets },
+    class: "btn btn-sm btn-primary" %>
+  <%= f.fields_for :cabinets do |cabinet| %>
+    <%= render 'cabinet_fields', f: cabinet %>
+  <% end %>
+</fieldset>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Performance Comments</div>
+  <div class="col-sm-8 editbold lt"><%= f.text_area :comments %></div>
+</div>
+
+<%= f.submit "Add Show", class: "btn btn-large btn-primary" %>
+<% end %>
+
+</div>
+</div>

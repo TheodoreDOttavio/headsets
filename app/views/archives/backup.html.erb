@@ -1,0 +1,57 @@
+<% provide(:title, 'About Us') %>
+<div align="center">
+<div class="well well-sm">
+
+<h1>Archive Raw Data</h1>
+<h2>Download text files of website data for local storage and archiving.
+<br>If these are edited, they are case sensitive (ex: 'true' not 'TRUE')'</h2>
+
+<div class="row">
+  <h2>
+  <div class="col-md-4">Description</div>
+  <div class="col-md-2">Filename</div>
+  <div class="col-md-2">Link</div>
+  <div class="col-md-2">Last Update</div>
+  <div class="col-md-2">qty</div>
+  </h2>
+</div>
+
+<%= render @archives %>
+
+</div>
+
+<div class="well well-sm" style="width: 50%;">
+  <h2>Pull a full report of all the distributed data - This takes a while!</h2>
+  <%= form_tag("/xlsflatfile", method: "post") do %>
+    <%= submit_tag 'Download an MS Excell Flat File', class: "btn btn-small btn-primary" %>
+  <% end %>
+</div>
+
+
+<div class="well well-sm" style="width: 50%;">
+
+<h1>Restore a Data file</h1>
+
+<h2>Use a file created by the links above to replace existing data
+
+
+<%= form_tag({action: :restore}, multipart: true) do %>
+  <div class="row">
+    <div class="col-md-2 rt"><%= check_box_tag :updateheroku %></div>
+    <div class="col-md-10 editlight lt">Throttle data to just under 10,000 records</div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 rt"><%= check_box_tag :freshreload %></div>
+    <div class="col-md-10 editlight lt">Check to delete existing records before loading. Uncheck to add new</div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 editbold ct"><%= file_field_tag 'data' %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 editbold ct"><%= submit_tag 'Upload', class: "btn btn-small btn-primary" %></div>
+  </div>
+<% end %>
+</div>
+
+</div>
+</div>

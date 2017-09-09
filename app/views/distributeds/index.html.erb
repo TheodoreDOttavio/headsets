@@ -1,0 +1,65 @@
+<% provide(:title, 'Distributed Data Entry') %>
+<div align="center">
+<div class="well well-sm" style="width: 90%;">
+<h1>Edit for <%= @weekof %></h1>
+
+<div class="row">
+  <div class="col-sm-12 editbold ct">Select a Show to add distribution:</div>
+<% @showstoedit.each_with_index do |p,i| %>
+  <% if i/4 == i/4.0 then %></div><div class="row"><% end %>
+  <div class="col-sm-3 editbold lt">
+  	<% if !findlog(@mystart, p[1], 1).nil? then %>
+      <%= image_tag "scan.png" %>
+    <% else %>
+      <%= image_tag "noscan.png" %>
+    <% end %>
+    <%= link_to p[0], new_distributed_path(params.merge(:mystart => params[:mystart],
+      :performance_id => p[1])),
+      :class => p[2] %>
+  </div>
+<% end %>
+</div>
+
+<h1>Review Distributions</h1>
+  <div class="row">
+  	<div class="col-sm-3">&nbsp;</div>
+    <div class="col-sm-2"><%= link_to "Blue is Complete", distributeds_path, class: "btn btn-sm btn-primary" %></div>
+    <div class="col-sm-2"><%= link_to "Yellow is Partial", distributeds_path, class: "btn btn-sm btn-warning" %></div>
+    <div class="col-sm-2"><%= link_to "Red is Empty", distributeds_path, class: "btn btn-sm btn-danger" %></div>
+    <div class="col-sm-3">&nbsp;</div>
+  </div>
+<p>
+
+  <div class="row">
+    <div class="col-sm-3 editbold lt">Change Week To Edit:</div>
+    <div class="col-sm-2 editbold ct">Shows Playing</div>
+    <div class="col-sm-1 editbold ct">w/Data</div>
+    <div class="col-sm-1 editbold ct">w/Logs</div>
+    <div class="col-sm-2 editbold ct">Tot Shifts</div>
+    <div class="col-sm-1 editbold rt">w/Reps</div>
+    <div class="col-sm-1 warningbold lt">TBD</div>
+  </div>
+
+  <% @weektoedit.each do |weekof| %>
+    <div class="row">
+      <div class="col-sm-3 editbold lt">
+        <%= link_to weekof["showweekof"], distributeds_path(params.merge(:mystart => weekof["startdate"])), class: weekof["buttonclass"] %>
+      </div>
+      <div class="col-sm-2 editlight ct"><%= weekof["showcount"] %></div>
+      <% if weekof["infraredcount"] < weekof["showcount"] then %>
+        <div class="col-sm-1 warninglight ct">
+      <% else %>
+        <div class="col-sm-1 editlight ct">
+      <% end %>
+      <%= weekof["infraredcount"] %></div>
+      <div class="col-sm-1 editlight ct"><%= weekof["scanscount"] %></div>
+      <div class="col-sm-2 editlight ct"><%= weekof["shiftcount"] %></div>
+      <div class="col-sm-1 editlight rt"><%= weekof["repcount"] %></div>
+      <% if weekof["tbdcount"] != 0 then %>
+        <div class="col-sm-1 warninglight lt"><%= weekof["tbdcount"] %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>
+</div>

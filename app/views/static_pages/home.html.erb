@@ -1,0 +1,15 @@
+<% provide(:title, 'Home Page') %>
+<div align="center">
+  <div class="well well-sm" style="width: 50%;">
+    <h1>Theater Data Entry and Reports</h1>
+    <h2>Headsets and Translation Services:</h2>
+      <h4>Enter quantities per show by Text or Voice</h4>
+      <h4>Update Shows</h4>
+      <h4>update Add/Edit Venues details</h4>
+
+  <% if !signed_in? %>
+    <%= link_to "Sign in", signin_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  <% end %>
+  </div>
+</div>

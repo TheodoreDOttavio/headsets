@@ -1,0 +1,70 @@
+<% provide(:title, "Edit Show") %>
+<div align="center">
+<div class="well well-sm" style="width: 75%;">
+
+<h1>Update Show</h1>
+
+<%= render 'static_pages/error_messages', :currentmodel => @performance %>
+
+<%= form_for(@performance) do |f| %>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Name</div>
+  <div class="col-sm-8 editbold lt"><%= f.text_field :name %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Theater</div>
+  <div class="col-sm-8 editbold lt">
+    <%= f.fields_for :theater do |b| %>
+      <%= f.select :theater_id, Theater.all.map {|e| [e.name, e.id]} %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">First Preview</div>
+  <div class="col-sm-8 editbold lt"><%= f.text_field :opening, :value => @performance.opening.strftime('%Y-%m-%d') %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">The Last Performance
+    <%= if @performance.closeing.strftime('%Y-%m-%d') == "3000-01-01" then
+      "is unknown"
+    else
+      if @performance.closeing <= DateTime.now then
+        " was " + @performance.closeing.strftime('%A  %b %d, %Y')
+      else
+        " is " + @performance.closeing.strftime('%A  %b %d, %Y')
+      end
+    end %>
+  </div>
+  <div class="col-sm-8 editbold rt"><%= f.text_field :closeing, :value => @performance.closeing.strftime('%Y-%m-%d') %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt">Performance Comments</div>
+  <div class="col-sm-8 editbold lt"><%= f.text_area :comments %></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 editbold rt"><%= f.check_box :specialservices %></div>
+  <div class="col-sm-8 editbold lt">Has Special Services (iCap, descript, and translation)</div>
+</div>
+
+<fieldset id="performance-cabinets" class="editbold">
+  <%= link_to_add_association 'add product', f, :cabinets,
+    'data-association-insertion-node' => "#performance-cabinets",
+    'data-association-insertion-method' => "append",
+    :wrap_object => Proc.new {|cabinets| cabinets.build_product; cabinets },
+    class: "btn btn-sm btn-primary" %>
+  <%= f.fields_for :cabinets do |cabinet| %>
+    <%= render 'cabinet_fields', f: cabinet %>
+  <% end %>
+</fieldset>
+
+<%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
+<% end %>
+
+</div>
+</div>

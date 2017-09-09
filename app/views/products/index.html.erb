@@ -1,0 +1,13 @@
+<% provide(:title, 'All Shows') %>
+<div align="center">
+<div class="well well-sm" style="width: 50%;">
+<h1>Product Details</h1>
+
+<%= will_paginate class: "editbold" %>
+  <%= render @products %>
+<%= will_paginate class: "editbold" %>
+
+<%= link_to "Create a new Device", new_product_path(@product), class: "btn btn-sm btn-primary" %>
+
+</div>
+</div>

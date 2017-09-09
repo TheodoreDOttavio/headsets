@@ -1,0 +1,50 @@
+<% provide(:title, 'Voice Data Entry') %>
+<div align="center">
+<div class="well well-sm">
+
+  <div class="row">
+      <div class="col-sm-8 editbold ct" style="position: relative;
+      top: 0px;
+      bottom: 0;
+      left: 0;
+      height: 800px;
+      overflow-y: scroll;">
+      <%= image_tag @thisimage %>
+    </div>
+    <div class="col-sm-4 editbold ct" style="position: relative;
+      top: 0px;
+      bottom: 0;
+      left: 0;
+      height: 800px;
+      overflow-y: scroll;">
+
+    <p><%= @showname %> - <%= @weekof %></p>
+
+    <button class="btn btn-small btn-success"
+      role="button" onclick="recognition.start();">Start</button>
+    <button class="btn btn-small btn-danger"
+      id="pause-record-btn" href="#"
+      role="button" onclick="recognition.stop();">Stop</button>
+    <div id="recording-instructions">This App requires the Chrome Browser and microphone access.</div>
+
+    <textarea id="raw-textarea" placeholder="Translated speach will show up in this text area."></textarea>
+
+    <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
+
+    <div id="myResults">
+      The end results should show the quantity and day, reformated into three characters and evening or matine added, Like this:
+      <br>0 - Tue Eve
+      <br>4 - Wed Mat
+      <br>1 - Wed Eve
+      <br>1 - Thu Eve
+      <br>0 - Fri Eve
+      <br>2 - Sat Mat
+      <br>4 - Sat Eve
+      <br>6 - Sun Mat
+    </div>
+
+    <%= link_to "Looks good? Save it!", ventrynew_path, class: "btn btn-sm btn-primary" %>
+</div>
+
+</div>
+</div>

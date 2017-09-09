@@ -1,0 +1,17 @@
+<div class="well well-sm" style="width: 75%;">
+<h1>Log Sheets from the field</h1>
+
+<div class="row">
+  <%= form_tag("/viewlogs", method: "post") do %>
+    <%= hidden_field_tag :logset, 1 %>
+    <div class="col-sm-2 editbold ct"><%= submit_tag 'View by Week of', class: "btn btn-sm btn-primary" %></div>
+    <div class="col-sm-4 editbold lt"><%= select(nilobject, :xportweekstart, allweeks) %></div>
+  <% end %>
+  <%= form_tag("/viewlogs", method: "post") do %>
+  <%= hidden_field_tag :logset, 2 %>
+    <div class="col-sm-2 editbold ct"><%= submit_tag 'View by Performance', class: "btn btn-sm btn-primary" %></div>
+    <div class="col-sm-4 editbold lt"><%= select(nilobject, :xportperformance, performances) %></div>
+  <% end %>
+</div>
+
+</div>

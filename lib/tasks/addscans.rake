@@ -75,7 +75,8 @@ namespace :db do
     #scope :translation, -> { where(product_id: [4, 5], language: [2..20]) }
     #scope :icapdesc, -> { where(product_id: [4, 5], language: [0..1]) }
 
-    transposeHash = {1 => 10, 3 => 20, 4 => 50, 5 => 40, 6 => 10, 7 => 20}
+    transposeHash = {1 => 10, 3 => 20, 6 => 10, 7 => 20}
+    # 4 => 50, 5 => 40 Need to make use of the language field in each Distributeds record.
 
     #NOTE split translation by language into descriptive and translation
   end

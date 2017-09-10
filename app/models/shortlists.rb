@@ -16,7 +16,7 @@ class Shortlists
     companies.push(%w(Schubert Schubert))
     @companies ||= companies
 
-    productCategories = {10: "Infrared", 20: "Loop", 30: "Descriptive Audio", 40: "iCaption", 50: "Translation"}
+    productCategories = {10 => "Infrared", 20 => "Loop", 30 => "Descriptive Audio", 40 => "iCaption", 50 => "Translation"}
     @productCategories ||= productCategories
   end
 end

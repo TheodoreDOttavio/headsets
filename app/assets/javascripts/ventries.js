@@ -76,10 +76,12 @@ recognition.onerror = function(event) {
 var parseToForm = function (txt) {
   var days = {"monday":"Mon", "tuesday":"Tue", "wednesday":"Wed", "thursday":"Thu", "friday":"Fri", "saturday":"Sat", "sunday":"Sun"}
   var numbs = {"zero":"0", "one":1, "two":2, "to":2, "too":2, "three":3, "four":4, "for":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9}
+  var mystartoffset = {"Mon":0, "Tue":1, "Wed":2, "Thu":3, "Fri":4, "Sat":5, "Sun":6}
   var wordArr = txt.split(' ');
   var buildShows = [];
   var buildQty = [];
   var buildhtm = '';
+  var eveningShift = true; //
 
   for (var i=0; i<wordArr.length; i++) {
     if (days[wordArr[i].toLowerCase()]){
@@ -113,27 +115,36 @@ var parseToForm = function (txt) {
   //   }
   // }
 
-  for (var i = 0; i<buildShows.length; i++){
-    //"<%= @mystart.strftime('%a E (%m \/ %d)') %><\/div>"
+  //Product ID
+  // buildhtm += "<input type=\"hidden\" value="10" name=\"ventry[product_id]\" id=\"ventry_product_id\">"
+  // buildhtm += "<input type=\"hidden\" value="0" name=\"ventry[language]\" id=\"ventry_language\">"
 
-    buildhtm += "<div class=\"row\"><div class=\"col-sm-6 editbold rt\">" + buildShows[i];
+  for (var i = 0; i<buildShows.length; i++){
+    buildhtm += "<div class=\"row\">"
 
     if (buildShows[i+1] == buildShows[i]){
-      buildhtm += " Mat";
+      eveningShift = false;
     }else{
       if (buildShows[i] == "Sun"){
         if (buildShows[i-1] == "Sun"){
-          buildhtm += " Eve";
+          eveningShift = true;
         }else{
-          buildhtm += " Mat";
+          eveningShift = false;
         }
       }else{
-        buildhtm += " Eve";
+        eveningShift = true;
       }
     }
-    // buildhtm += "<\/div><div class=\"col-sm-2 editbold lt tight\"><%= number_field :quantity, value: " + buildQty[i] + " %><\/div><\/div>";
+    buildhtm += "<input value=\"" + mystartoffset[buildShows[i]] + "\" type=\"hidden\" name=\"ventry" + i + "[curtain]\" id=\"ventry" + i + "_curtain\" >";
+    buildhtm += "<input value=\"" + eveningShift + "\" type=\"hidden\" name=\"ventry" + i + "[eve]\" id=\"ventry" + i + "_eve\" >";
+
+    buildhtm += "<div class=\"col-sm-6 editbold rt\">" + buildShows[i]
+    if (eveningShift) { buildhtm += " Eve";
+    }else{ buildhtm +=" Mat"; }
+    buildhtm += "<\/div>";
     //<input value="0" tabIndex="2000" type="number" name="distributed5[quantity]" id="distributed5_quantity" />
-    buildhtm += "<\/div><div class=\"col-sm-2 editbold lt tight\"><input value=\"" + buildQty[i] + "\" type=\"number\"><\/div><\/div>";
+    //<input value="7" type="hidden" name="distributed15[product_id]" id="distributed15_product_id" />
+    buildhtm += "<div class=\"col-sm-2 editbold lt tight\"><input value=\"" + buildQty[i] + "\" type=\"number\"><\/div><\/div>";
   }
 
   $('#myResults').html(buildhtm);

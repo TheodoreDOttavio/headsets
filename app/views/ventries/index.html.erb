@@ -27,11 +27,16 @@
     <button class="btn btn-small btn-danger"
       id="pause-record-btn" href="#"
       role="button" onclick="recognition.stop();">Stop</button>
+    <button class="btn btn-small btn-danger"
+      id="pause-record-btn" href="#"
+      role="button" onclick="parseToForm('Monday 1 Tuesday 3 Wednesday 0 Wednesday 5');">Offline Test</button>
     <div id="recording-instructions">This App requires the Chrome Browser and microphone access.</div>
 
     <textarea id="raw-textarea" placeholder="Translated speach will show up in this text area."></textarea>
 
     <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
+
+    <input value="<%= @showid %>" type="hidden" name="showid" id="showid">
 
     <div id="myResults">
       The end results should show the quantity and day, reformated into three characters and evening or matine added, Like this:

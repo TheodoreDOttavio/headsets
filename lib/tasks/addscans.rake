@@ -70,6 +70,7 @@ namespace :db do
     # 30 Descriptive
     # 40 iCaption
     # 50 Translation
+    # NOTE use  = Shortlists.new.productCategories for name....
     #scope :infrared, -> { where(product_id: [1, 3, 6, 7]) }
     #scope :translation, -> { where(product_id: [4, 5], language: [2..20]) }
     #scope :icapdesc, -> { where(product_id: [4, 5], language: [0..1]) }

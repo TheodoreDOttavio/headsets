@@ -1,7 +1,7 @@
 class Shortlists
   include ActiveModel::Model
 
-  attr_accessor :languages, :companies
+  attr_accessor :languages, :companies, :productCategories
 
   def initialize
     super
@@ -15,5 +15,8 @@ class Shortlists
     companies.push(%w(Jujamcyn Jujamcyn))
     companies.push(%w(Schubert Schubert))
     @companies ||= companies
+
+    productCategories = {10: "Infrared", 20: "Loop", 30: "Descriptive Audio", 40: "iCaption", 50: "Translation"}
+    @productCategories ||= productCategories
   end
 end

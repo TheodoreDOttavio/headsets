@@ -10,6 +10,7 @@ class VentriesController < ApplicationController
 
     show = Distributed.nextEmptySheet(@mystart).last
     @showname =  show.performance.name
+    @showid =  show.performance.id
 
     @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6).strftime('%b %d, %Y')
 

@@ -79,7 +79,7 @@ var parseToForm = function (txt) {
   var wordArr = txt.split(' ');
   var buildShows = [];
   var buildQty = [];
-  var buildhtm = 'Headsets:';
+  var buildhtm = '';
 
   for (var i=0; i<wordArr.length; i++) {
     if (days[wordArr[i].toLowerCase()]){
@@ -96,8 +96,28 @@ var parseToForm = function (txt) {
 
   //Build a preview...
   //Change this to add to form post or a Json API submision.
+  // for (var i = 0; i<buildShows.length; i++){
+  //   buildhtm += "<br>" + buildQty[i] + " : " + buildShows[i];
+  //   if (buildShows[i+1] == buildShows[i]){
+  //     buildhtm += " Mat";
+  //   }else{
+  //     if (buildShows[i] == "Sun"){
+  //       if (buildShows[i-1] == "Sun"){
+  //         buildhtm += " Eve";
+  //       }else{
+  //         buildhtm += " Mat";
+  //       }
+  //     }else{
+  //       buildhtm += " Eve";
+  //     }
+  //   }
+  // }
+
   for (var i = 0; i<buildShows.length; i++){
-    buildhtm += "<br>" + buildQty[i] + " : " + buildShows[i];
+    //"<%= @mystart.strftime('%a E (%m \/ %d)') %><\/div>"
+
+    buildhtm += "<div class=\"row\"><div class=\"col-sm-6 editbold rt\">" + buildShows[i];
+
     if (buildShows[i+1] == buildShows[i]){
       buildhtm += " Mat";
     }else{
@@ -111,6 +131,10 @@ var parseToForm = function (txt) {
         buildhtm += " Eve";
       }
     }
+    // buildhtm += "<\/div><div class=\"col-sm-2 editbold lt tight\"><%= number_field :quantity, value: " + buildQty[i] + " %><\/div><\/div>";
+    //<input value="0" tabIndex="2000" type="number" name="distributed5[quantity]" id="distributed5_quantity" />
+    buildhtm += "<\/div><div class=\"col-sm-2 editbold lt tight\"><input value=\"" + buildQty[i] + "\" type=\"number\"><\/div><\/div>";
   }
+
   $('#myResults').html(buildhtm);
 }

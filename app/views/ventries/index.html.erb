@@ -9,6 +9,8 @@
       left: 0;
       height: 800px;
       overflow-y: scroll;">
+      <%= image_tag findlog(@mystart, @showid, 1) %>
+      <%= image_tag findlog(@mystart, @showid, 2) %>
       <%= image_tag @thisimage %>
     </div>
     <div class="col-sm-4 editbold ct" style="position: relative;
@@ -41,6 +43,14 @@
       <br>2 - Sat Mat
       <br>4 - Sat Eve
       <br>6 - Sun Mat
+      <div class="row">
+        <div class="col-sm-6 editbold rt">
+          <%= @mystart.strftime('%a E (%m / %d)') %>
+        </div>
+        <div class="col-sm-2 editbold lt tight">
+          <%= number_field :quantity, value: 3 %>
+        </div>
+      </div>
     </div>
 
     <%= link_to "Looks good? Save it!", ventrynew_path, class: "btn btn-sm btn-primary" %>

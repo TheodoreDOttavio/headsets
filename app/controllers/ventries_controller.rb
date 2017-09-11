@@ -50,8 +50,16 @@ class VentriesController < ApplicationController
       obj.eve = params[rowname]['eve']
       obj.quantity = params[rowname]['qty']
       # obj.save
-      #TODO add isprocesed flag to scans
     end
+    #TODO add isprocesed flag to scans
+    ss = false
+    ss = true if params['productCat'].to_i > 20
+    scanobj = Scan.where(monday: params[:mystart].to_date,
+      performance_id: params['showid'].to_i
+      specialservices: ss)
+    scanobj.isprocessed = true
+    # scanobj.save
+
     flash[:success] += i.to_s + " for this:   " + params.inspect
 
     redirect_to ventry_path

@@ -34,33 +34,17 @@
 
     <textarea id="raw-textarea" placeholder="Translated speach will show up in this text area."></textarea>
 
-    <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
+    <p>Say only the theater show day, and then headset quantity in order from Mon-Sun. {action: :sort},</p>
 
-    <%= form_tag({action: :new}, multipart: true) do %>
-    <input value="<%= @showid %>" type="hidden" name="showid" id="showid">
-    <!-- Add checkboxes for language/icap/description/loops -->
+    <%= form_tag("/ventrynew", method: "post") do %>
+      <input value="<%= @showid %>" type="hidden" name="showid" id="showid">
+      <!-- Add checkboxes for language/icap/description/loops -->
 
-    <div id="myResults">
-      <!-- The end results should show the quantity and day, reformated into three characters and evening or matine added, Like this:
-      <br>0 - Tue Eve
-      <br>4 - Wed Mat
-      <br>1 - Wed Eve
-      <br>1 - Thu Eve
-      <br>0 - Fri Eve
-      <br>2 - Sat Mat
-      <br>4 - Sat Eve
-      <br>6 - Sun Mat
-      <div class="row">
-        <div class="col-sm-6 editbold rt">
-          <%= @mystart.strftime('%a E (%m / %d)') %>
-        </div>
-        <div class="col-sm-2 editbold lt tight">
-          <%= number_field :quantity, value: 3 %>
-        </div>
-      </div> -->
-    </div>
+      <div id="myResults">
+        <!-- js added form rows -->
+      </div>
 
-    <%= submit_tag 'Looks good? Save it!', class: "btn btn-sm btn-primary" %>
+      <%= submit_tag 'Looks good? Save it!', class: "btn btn-sm btn-primary" %>
     <% end %>
 </div>
 

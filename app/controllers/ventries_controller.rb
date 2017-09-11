@@ -1,6 +1,6 @@
 class VentriesController < ApplicationController
   def index
-    redirect_to root_url unless current_user.admin?
+    administratorsOnly
 
     if params[:mystart] then
       @mystart = params[:mystart].to_date
@@ -22,7 +22,29 @@ class VentriesController < ApplicationController
 
   def new
     #submit data - and reload ventries#index
+    for i in 1..params['shiftcount'].to_i do
+      obj = Distributed.new()
+      obj.performance_id = params['showid']
+      obj.curtain = params['ventry0']['curtain']
+      obj.eve = params['ventry0']['eve']
+    end
     flash[:success] = 'Done - week of ### for show ### Added.'
+    # flash[:success] = params.inspect
+    flash[:success] = obj.inspect
     redirect_to ventry_path
   end
+
+  # t.integer  "performance_id",                 null: false
+  # t.integer  "product_id",                     null: false
+  # t.datetime "curtain",                        null: false
+  # t.boolean  "eve",            default: true
+  # t.integer  "quantity"
+  # t.integer  "language",       default: 0,     null: false
+  # t.integer  "general",        default: 0
+  # t.integer  "representative", default: 0
+  # t.datetime "created_at"
+  # t.datetime "updated_at"
+  # t.boolean  "isinfrared",     default: false
+  # t.boolean  "scan",           default: false
+
 end

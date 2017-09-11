@@ -146,6 +146,8 @@ var parseToForm = function (txt) {
     //<input value="7" type="hidden" name="distributed15[product_id]" id="distributed15_product_id" />
     buildhtm += "<div class=\"col-sm-2 editbold lt tight\"><input value=\"" + buildQty[i] + "\" type=\"number\"><\/div><\/div>";
   }
+  
+  buildhtm += "<input value=\"" + i + "\" type=\"hidden\" name=\"shiftcount\" id=\"shiftcount\" >";
 
   $('#myResults').html(buildhtm);
 }

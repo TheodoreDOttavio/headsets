@@ -8,6 +8,14 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include SessionsHelper
 
+  def administratorsOnly
+    if current_user.nil? then
+      redirect_to root_url
+    else
+      redirect_to root_url unless current_user.admin?
+    end
+  end
+
   def weekstart
     astart = DateTime.now.utc.beginning_of_day
     loop do

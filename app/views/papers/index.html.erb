@@ -70,47 +70,6 @@
 <% end %>
 </div>
 
-
 <%= render "selectlog", :allweeks => @allweeks, :performances => @performances, :nilobject => @object %>
-
-
-<!--
-<div class="well well-sm" style="width: 75%;">
-<h1>Data Review</h1>
-
-  <div class="row">
-    <div class="col-sm-3 editbold rt">Week of:</div>
-    <div class="col-sm-1 editbold ct">Shows</div>
-    <div class="col-sm-1 editbold ct">Infrared</div>
-    <div class="col-sm-1 editbold ct">Special Services</div>
-    <div class="col-sm-2 editbold ct">Shifts</div>
-    <div class="col-sm-1 editbold rt">Reps</div>
-    <div class="col-sm-1 warningbold lt">TBD</div>
-  </div>
-
-<percent @weektoedit.each do |weekof| percent>
-  <div class="row">
-    <div class="col-sm-3 editbold rt" >
-    	<percent= link_to weekof["showweekof"], distributeds_path(params.merge(:mystart => weekof["startdate"])) percent>
-    </div>
-    <div class="col-sm-1 editlight ct"><percent= weekof["showcount"] percent></div>
-    <percent if weekof["infraredcount"] < weekof["showcount"] then percent>
-      <div class="col-sm-1 warninglight ct">
-    <percent else percent>
-      <div class="col-sm-1 editlight ct">
-    <percent end percent>
-    <percent= weekof["infraredcount"] percent></div>
-    <div class="col-sm-1 editlight ct"><percent= weekof["specialservicescount"] percent></div>
-    <div class="col-sm-2 editlight ct"><percent= weekof["shiftcount"] percent></div>
-    <div class="col-sm-1 editlight rt"><percent= weekof["repcount"] percent></div>
-    <percent if weekof["tbdcount"] != 0 then percent>
-      <div class="col-sm-1 warninglight lt"><percent= weekof["tbdcount"] percent></div>
-    <percent end percent>
-  </div>
-<percent end percent>
-
-</div>
-</div>
-!-->
 
 </div>

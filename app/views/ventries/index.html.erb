@@ -57,6 +57,16 @@
         </div>
       </div>
       <!-- Checkbox for empty sheets - booloan for scans:processed -->
+      <div class="row">
+        <div class="col-sm-10 editbold rt">Data Entry - Do Nothing Special</div>
+        <div class="col-sm-2 lt"><%= radio_button_tag(:task, 0, checked: true) %></div>
+        <div class="col-sm-10 editbold rt">Log is blank - Mark as Complete</div>
+        <div class="col-sm-2 lt"><%= radio_button_tag(:task, 1) %></div>
+        <div class="col-sm-10 editbold rt">Log is incorrect - Move to Import</div>
+        <div class="col-sm-2 lt"><%= radio_button_tag(:task, 2) %></div>
+        <div class="col-sm-10 editbold rt">Log has multiple weeks - Mark as Extra</div>
+        <div class="col-sm-2 lt"><%= radio_button_tag(:task, 3) %></div>
+      </div>
 
       <div id="myResults">
         <!-- js added form rows -->

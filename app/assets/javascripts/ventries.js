@@ -99,6 +99,7 @@ var parseToForm = function (txt) {
   //Build form entry rows
   for (var i = 0; i<buildShows.length; i++){
     buildhtm += "<div class=\"row\">"
+    buildhtm += "<input value=\"Data\" type=\"hidden\" name=\"task\" id=\"task\" >";
 
     if (buildShows[i+1] == buildShows[i]){
       eveningShift = false;

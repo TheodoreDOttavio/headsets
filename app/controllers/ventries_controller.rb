@@ -26,7 +26,9 @@ class VentriesController < ApplicationController
 
   def new
     #submit data - and reload ventries#index
-    flash[:success] = 'Done - week of ### for show ### Added.'
+    flash[:success] = params[:task] + "-------"
+
+    # flash[:success] = 'Done - week of ### for show ### Added.'
     for i in 0..(params['shiftcount'].to_i)-1 do
       obj = Distributed.new()
       obj.performance_id = params['showid'].to_i
@@ -48,23 +50,12 @@ class VentriesController < ApplicationController
       obj.eve = params[rowname]['eve']
       obj.quantity = params[rowname]['qty']
       # obj.save
+      #TODO add isprocesed flag to scans
     end
-    flash[:success] += params.inspect
+    flash[:success] += i.to_s + " for this:   " + params.inspect
 
     redirect_to ventry_path
   end
 
-  # t.integer  "performance_id",                 null: false
-  # t.integer  "language",                     null: false
-  # t.datetime "curtain",                        null: false
-  # t.boolean  "eve",            default: true
-  # t.integer  "quantity"
-  # t.integer  "language",       default: 0,     null: false
-  # t.integer  "general",        default: 0
-  # t.integer  "representative", default: 0
-  # t.datetime "created_at"
-  # t.datetime "updated_at"
-  # t.boolean  "isinfrared",     default: false
-  # t.boolean  "scan",           default: false
 
 end

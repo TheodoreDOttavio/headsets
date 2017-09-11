@@ -40,7 +40,7 @@
       <input value="<%= @mystart %>" type="hidden" name="mystart" id="mystart">
       <input value="<%= @showid %>" type="hidden" name="showid" id="showid">
 
-      <!-- Add checkboxes for language/icap/description/loops -->
+      <!-- Pulldowns for language/icap/description/loops -->
       <div class="row">
         <div class="col-sm-6 editbold rt">
           Product Type
@@ -57,6 +57,7 @@
           <%= select(@object, :language, @languages) %>
         </div>
       </div>
+      <!-- Checkbox for empty sheets - booloan for scans:processed -->
 
       <div id="myResults">
         <!-- js added form rows -->

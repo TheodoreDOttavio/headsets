@@ -62,6 +62,16 @@ namespace :db do
   end
 
 
+  task populate_isprocessed: :environment do
+    #mark infrared sheets
+    allobjs = Scan.where(isprocessed: false, specialservices: false).limit(10)
+    allobjs.each do |obj|
+      check = Distributed.infrared.findShift(obj.monday, performance_id)
+      puts check.count
+    end
+  end
+
+
   task transposeproduct: :environment do
     puts "Converting product ID's in Distributeds datum to a product category ID"
     # Convert produt ID's to Product type

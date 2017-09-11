@@ -96,29 +96,7 @@ var parseToForm = function (txt) {
     }
   }
 
-  //Build a preview...
-  //Change this to add to form post or a Json API submision.
-  // for (var i = 0; i<buildShows.length; i++){
-  //   buildhtm += "<br>" + buildQty[i] + " : " + buildShows[i];
-  //   if (buildShows[i+1] == buildShows[i]){
-  //     buildhtm += " Mat";
-  //   }else{
-  //     if (buildShows[i] == "Sun"){
-  //       if (buildShows[i-1] == "Sun"){
-  //         buildhtm += " Eve";
-  //       }else{
-  //         buildhtm += " Mat";
-  //       }
-  //     }else{
-  //       buildhtm += " Eve";
-  //     }
-  //   }
-  // }
-
-  //Product ID
-  // buildhtm += "<input type=\"hidden\" value="10" name=\"ventry[product_id]\" id=\"ventry_product_id\">"
-  // buildhtm += "<input type=\"hidden\" value="0" name=\"ventry[language]\" id=\"ventry_language\">"
-
+  //Build form entry rows
   for (var i = 0; i<buildShows.length; i++){
     buildhtm += "<div class=\"row\">"
 

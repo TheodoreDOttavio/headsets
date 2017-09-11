@@ -9,11 +9,6 @@ Scans needs a processed boolean for "next Distributed" in voice entry
 TESTING!!!
   get basic tests back in and continue with TDD
 
-Add Availability
-  edit for all users when logged in as admin
-
-Show scheduling
-
 Rip out Distributeds controller and implement it with a hash based model object
   Pass Distributeds id as an array... simplify all the looping crap
   use model.update....
@@ -23,10 +18,6 @@ Data Archive
     Marshal all database tables?
   Save users with passwords intact
     A custom archive that uses users.create?
-
-Users
-  Save a signature snapstot
-  Admin needs to be able to set stats of other users without password
 
 Data Entry
   two partials for infrared and special services

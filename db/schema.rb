@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330170328) do
+ActiveRecord::Schema.define(version: 20170911113700) do
 
   create_table "availables", force: :cascade do |t|
     t.integer  "user_id",    default: 1
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20160330170328) do
     t.boolean  "specialservices", default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.boolean  "isprocessed",     default: false
   end
 
   add_index "scans", ["performance_id"], name: "index_scans_on_performance_id"

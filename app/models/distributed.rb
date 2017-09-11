@@ -7,6 +7,9 @@ class Distributed < ActiveRecord::Base
   scope :nextEmptySheet, ->(mystart) {
     where(curtain: [mystart..(mystart + 6)]).last
   }
+  scope :findShift, ->(mymon, performanceid) {
+    where(curtain: [mymon..(mymon + 6)], performance_id: performanceid).distinct.pluck(:performance_id)
+  }
 
   # Scopes for xls and pdf reports
 

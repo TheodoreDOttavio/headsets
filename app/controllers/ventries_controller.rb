@@ -39,19 +39,32 @@ class VentriesController < ApplicationController
     for i in 0..(params['shiftcount'].to_i)-1 do
       obj = Distributed.new()
       obj.performance_id = params['showid'].to_i
+      obj.product_id = params['productCat'].to_i
+
+      obj.language = params['language'].to_i
+      case params['productCat'].to_i
+      when 10, 20
+        obj.language = 0
+        obj.isinfrared = true
+      when 30
+        obj.language = 2
+      when 40
+        obj.language = 1
+      end
+
       rowname = 'ventry' + i.to_s
       obj.curtain = params[:mystart].to_date + params[rowname]['weekday'].to_i
       obj.eve = params[rowname]['eve']
       obj.quantity = params[rowname]['qty']
-      # flash[:success] += obj.curtain.strftime('%b %d')
+      # obj.save
     end
-    # flash[:success] += params.inspect
+    flash[:success] += params.inspect
 
     redirect_to ventry_path
   end
 
   # t.integer  "performance_id",                 null: false
-  # t.integer  "product_id",                     null: false
+  # t.integer  "language",                     null: false
   # t.datetime "curtain",                        null: false
   # t.boolean  "eve",            default: true
   # t.integer  "quantity"

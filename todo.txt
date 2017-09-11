@@ -1,3 +1,6 @@
+Scans needs a processed boolean for "next Distributed" in voice entry
+
+
  Check Special Services Boolean
    for Data Entry image view
    for data entry preview scan/noscan icons
@@ -5,7 +8,7 @@
 
 TESTING!!!
   get basic tests back in and continue with TDD
-  
+
 Add Availability
   edit for all users when logged in as admin
 
@@ -32,7 +35,7 @@ Data Entry
 Paperwork and Reports
   @object for the select tags... it's nil, doesn't work without it. Need to grok this.
   Default select pdf on weekly exports
-  
+
 Remove or use Distributed Reports - Data viewer
 
 And keep checking:

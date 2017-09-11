@@ -14,7 +14,7 @@ namespace :db do
 
     yearlist = Dir.glob('app/assets/images/2*')
     yearlist.each do |y|
-      puts 'adding year' + y.split('/').last
+      puts 'adding year ' + y.split('/').last
       idlist = Dir.glob(y.to_s + '/*')
       idlist.each do |i|
         scanlist = Dir.glob(i.to_s + '/*.jpg')
@@ -22,22 +22,31 @@ namespace :db do
           filename = scan.split('/').last
           mondayarray = filename.split('-')
           id = filename.split('-').first
-          ss = if filename.split('-').last.split('.').first == '1'
+          ss = if filename.split('-').last.split('.').first == '2'
                  true
                else
                  false
                end
           monday = DateTime.new(mondayarray[1].to_i, mondayarray[2].to_i, mondayarray[3].to_i)
 
+          processed = false
+          if ss then
+            check = Distributed.findShift(monday, id).translation
+            processed = true if check.count != 0
+          else
+            check = Distributed.findShift(monday, id).infrared
+            processed = true if check.count != 0
+          end
+
           ActiveRecord::Base.transaction do
-            obj = Scan.new(performance_id: id, monday: monday, specialservices: ss)
+            obj = Scan.new(performance_id: id, monday: monday, specialservices: ss, isprocessed: processed)
             obj.save
           end
         end
       end
     end
 
-    puts "all jpg files scanned added. This reset Scan.id's and relies on the Scans.rb controller to record files..."
+    puts "all jpg files scanned added, and marked as processed if data was found. This reset Scan.id's and relies on the Scans.rb controller to record files..."
   end # task
 
   task runme: :environment do
@@ -62,14 +71,28 @@ namespace :db do
   end
 
 
-  task populate_isprocessed: :environment do
-    #mark infrared sheets
-    allobjs = Scan.where(isprocessed: false, specialservices: false).limit(10)
-    allobjs.each do |obj|
-      check = Distributed.infrared.findShift(obj.monday, performance_id)
-      puts check.count
-    end
-  end
+  # task populate_isprocessed: :environment do
+  #   #mark infrared sheets
+  #   # allobjs = Scan.where(isprocessed: true)
+  #   # puts "Resetting " + allobjs.count.to_s + " to unprocessed"
+  #   # allobjs.each do |obj|
+  #   #   obj.isprocessed = true
+  #   #   obj.save
+  #   # end
+  #
+  #   allobjs = Scan.where(isprocessed: false, specialservices: true)#.limit(100)
+  #   allobjs.each do |obj|
+  #     show = Performance.find(obj.performance_id)
+  #     if show.nil? == false then
+  #       check = Distributed.findShift(obj.monday, obj.performance_id).translation
+  #       if check.count != 0 then
+  #         obj.isprocessed = true
+  #         puts " setting processed to true " + check.count.to_s + " translation shifts for " + show.name.to_s + " on - " + obj.monday.strftime('%b %d, %Y')
+  #         # obj.save
+  #       end
+  #     end
+  #   end
+  # end
 
 
   task transposeproduct: :environment do

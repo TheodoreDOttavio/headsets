@@ -2,15 +2,11 @@ class VentriesController < ApplicationController
   def index
     administratorsOnly
 
-    if params[:mystart] then
-      @mystart = params[:mystart].to_date
-    else
-      @mystart = weekstart
-    end
+    show = Scan.unprocessed
+    @mystart = show.first.monday #params[:mystart].to_date
 
-    show = Distributed.nextEmptySheet(@mystart).last
-    @showname =  show.performance.name
-    @showid =  show.performance.id
+    @showname =  Performance.find(show.first.performance_id).name
+    @showid =  show.first.performance_id
 
     @productCats = []
     productCats = Shortlists.new.productCategories
@@ -24,12 +20,7 @@ class VentriesController < ApplicationController
       @languages.push([key.to_s, value]) if value >= 3
     end
 
-    @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6).strftime('%b %d, %Y')
-
-    require 'fileutils'
-
-    jpegfilelist = Dir.glob('app/assets/images/ftp/*.jpg')
-    @thisimage = 'ftp/' + jpegfilelist.first.split('/').last
+    @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6.days).strftime('%b %d, %Y')
   end
 
 

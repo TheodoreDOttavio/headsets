@@ -4,11 +4,8 @@ class Distributed < ActiveRecord::Base
 
   # Converting from Theaterstaff to Headsets.
   #  new Scopes starting with Selecting for Voice entry
-  scope :nextEmptySheet, ->(mystart) {
-    where(curtain: [mystart..(mystart + 6)]).last
-  }
   scope :findShift, ->(mymon, performanceid) {
-    where(curtain: [mymon..(mymon + 6)], performance_id: performanceid).distinct.pluck(:performance_id)
+    where(curtain: [mymon..(mymon + 6.days)], performance_id: performanceid)
   }
 
   # Scopes for xls and pdf reports

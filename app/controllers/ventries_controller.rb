@@ -12,6 +12,18 @@ class VentriesController < ApplicationController
     @showname =  show.performance.name
     @showid =  show.performance.id
 
+    @productCats = []
+    productCats = Shortlists.new.productCategories
+    productCats.each do |key, value|
+      @productCats.push([value, key])
+    end
+
+    @languages = [["Theater Audio", 0]]
+    languages = Shortlists.new.languages
+    languages.each do |key, value|
+      @languages.push([key.to_s, value]) if value >= 3
+    end
+
     @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6).strftime('%b %d, %Y')
 
     require 'fileutils'
@@ -20,17 +32,21 @@ class VentriesController < ApplicationController
     @thisimage = 'ftp/' + jpegfilelist.first.split('/').last
   end
 
+
   def new
     #submit data - and reload ventries#index
-    for i in 1..params['shiftcount'].to_i do
-      obj = Distributed.new()
-      obj.performance_id = params['showid']
-      obj.curtain = params['ventry0']['curtain']
-      obj.eve = params['ventry0']['eve']
-    end
     flash[:success] = 'Done - week of ### for show ### Added.'
-    # flash[:success] = params.inspect
-    flash[:success] = obj.inspect
+    for i in 0..(params['shiftcount'].to_i)-1 do
+      obj = Distributed.new()
+      obj.performance_id = params['showid'].to_i
+      rowname = 'ventry' + i.to_s
+      obj.curtain = params[:mystart].to_date + params[rowname]['weekday'].to_i
+      obj.eve = params[rowname]['eve']
+      obj.quantity = params[rowname]['qty']
+      # flash[:success] += obj.curtain.strftime('%b %d')
+    end
+    # flash[:success] += params.inspect
+
     redirect_to ventry_path
   end
 

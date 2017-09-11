@@ -34,11 +34,29 @@
 
     <textarea id="raw-textarea" placeholder="Translated speach will show up in this text area."></textarea>
 
-    <p>Say only the theater show day, and then headset quantity in order from Mon-Sun. {action: :sort},</p>
+    <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
 
     <%= form_tag("/ventrynew", method: "post") do %>
+      <input value="<%= @mystart %>" type="hidden" name="mystart" id="mystart">
       <input value="<%= @showid %>" type="hidden" name="showid" id="showid">
+
       <!-- Add checkboxes for language/icap/description/loops -->
+      <div class="row">
+        <div class="col-sm-6 editbold rt">
+          Product Type
+        </div>
+        <div class="col-sm-6 editbold rt">
+        <%= select(@object, :productCat, @productCats) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 editbold rt">
+          Language
+        </div>
+        <div class="col-sm-6 editbold rt">
+          <%= select(@object, :language, @languages) %>
+        </div>
+      </div>
 
       <div id="myResults">
         <!-- js added form rows -->

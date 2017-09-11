@@ -135,8 +135,9 @@ var parseToForm = function (txt) {
         eveningShift = true;
       }
     }
-    buildhtm += "<input value=\"" + mystartoffset[buildShows[i]] + "\" type=\"hidden\" name=\"ventry" + i + "[curtain]\" id=\"ventry" + i + "_curtain\" >";
+    buildhtm += "<input value=\"" + mystartoffset[buildShows[i]] + "\" type=\"hidden\" name=\"ventry" + i + "[weekday]\" id=\"ventry" + i + "_weekday\" >";
     buildhtm += "<input value=\"" + eveningShift + "\" type=\"hidden\" name=\"ventry" + i + "[eve]\" id=\"ventry" + i + "_eve\" >";
+    buildhtm += "<input value=\"" + buildQty[i] + "\" type=\"hidden\" name=\"ventry" + i + "[qty]\" id=\"ventry" + i + "_qty\" >";
 
     buildhtm += "<div class=\"col-sm-6 editbold rt\">" + buildShows[i]
     if (eveningShift) { buildhtm += " Eve";
@@ -144,9 +145,9 @@ var parseToForm = function (txt) {
     buildhtm += "<\/div>";
     //<input value="0" tabIndex="2000" type="number" name="distributed5[quantity]" id="distributed5_quantity" />
     //<input value="7" type="hidden" name="distributed15[product_id]" id="distributed15_product_id" />
-    buildhtm += "<div class=\"col-sm-2 editbold lt tight\"><input value=\"" + buildQty[i] + "\" type=\"number\"><\/div><\/div>";
+    buildhtm += "<div class=\"col-sm-4 editbold lt tight\"><input value=\"" + buildQty[i] + "\" type=\"number\"><\/div><\/div>";
   }
-  
+
   buildhtm += "<input value=\"" + i + "\" type=\"hidden\" name=\"shiftcount\" id=\"shiftcount\" >";
 
   $('#myResults').html(buildhtm);

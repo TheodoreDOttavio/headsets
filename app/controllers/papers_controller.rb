@@ -1,49 +1,49 @@
 class PapersController < ApplicationController
   def index
-    if current_user.admin?
-      # Theater listing with extra selections
-      @theaters = []
-      @theaters.push(['All Theaters', 1])
+    administratorsOnly
+    # Theater listing with extra selections
+    @theaters = []
+    @theaters.push(['All Theaters', 1])
 
-      companies = Shortlists.new.companies
-      companies.each_with_index do |company, _companyindex|
-        @theaters.push(['All ' + company[0] + ' Theaters', company[1]])
-      end
+    companies = Shortlists.new.companies
+    companies.each_with_index do |company, _companyindex|
+      @theaters.push(['All ' + company[0] + ' Theaters', company[1]])
+    end
 
-      theaters = Theater.select(:id, :name)
-      theaters.each do |t|
-        @theaters.push([t.name, t.id]) if t.id != 1
-      end
+    theaters = Theater.select(:id, :name)
+    theaters.each do |t|
+      @theaters.push([t.name, t.id]) if t.id != 1
+    end
 
-      # Delivery Options
-      @deliveryformat = []
-      @deliveryformat.push(['Download', 1])
-      @deliveryformat.push(['Email: ', 2])
+    # Delivery Options
+    @deliveryformat = []
+    @deliveryformat.push(['Download', 1])
+    @deliveryformat.push(['Email: ', 2])
 
-      # for weekly output function
-      @outputformat = []
-      @outputformat.push(['PDF Cover Sheet', 1])
-      @outputformat.push(['MS Excell Files', 2])
+    # for weekly output function
+    @outputformat = []
+    @outputformat.push(['PDF Cover Sheet', 1])
+    @outputformat.push(['MS Excell Files', 2])
 
-      # for Blank Paperwork
-      @upcomingweeks = Distributed.upcomingweeks
+    # for Blank Paperwork
+    @upcomingweeks = Distributed.upcomingweeks
 
-      # for monthly reports
-      @allmonths = Distributed.allmonths
+    # for monthly reports
+    @allmonths = Distributed.allmonths
 
-      # for weekly xls reports, PDF cover sheets, and paper log view
-      @allweeks = Distributed.allweeks(weekstart)
+    # for weekly xls reports, PDF cover sheets, and paper log view
+    @allweeks = Distributed.allweeks(weekstart)
 
-      # for Viewing timespan of Paper Logs Scanned in
-      @performances = Performance.selectionlist
+    # for Viewing timespan of Paper Logs Scanned in
+    @performances = Performance.selectionlist
 
-      @ssperformances = Performance.ssselectionlist # Cabinet.translation
+    @ssperformances = Performance.ssselectionlist # Cabinet.translation
 
-      @showyears = []
-      for x in 0..3 do
-        showyear = DateTime.now.strftime('%Y').to_i - x
-        @showyears.push([showyear.to_s, showyear.to_s])
-      end
+    @showyears = []
+    for x in 0..3 do
+      showyear = DateTime.now.strftime('%Y').to_i - x
+      @showyears.push([showyear.to_s, showyear.to_s])
+    end
 
     #     #Display where the data is at - overview of what has been entered
     #     @weektoedit = Array.new
@@ -79,9 +79,6 @@ class PapersController < ApplicationController
     #         "tbdcount" => mytbdrepcount,
     #         "myclass" => mybuttonclass})
     #     end
-    else
-      redirect_to root_url
-    end
   end
 
   def generateweekly

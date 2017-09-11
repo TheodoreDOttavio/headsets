@@ -1,5 +1,6 @@
 class ArchivesController < ApplicationController
   def backup
+    administratorsOnly
     @archives = Archives.new
 
     mymodel = params[:mymodel]
@@ -24,6 +25,7 @@ class ArchivesController < ApplicationController
   end
 
   def restore
+    administratorsOnly
     uploaded_io = params[:data]
 
     if uploaded_io.nil?
@@ -95,6 +97,8 @@ class ArchivesController < ApplicationController
   end
 
   def xlsflatfile
+    administratorsOnly
+
     folder = 'app/reports/'
     file = 'SA_distribution.xls'
 

@@ -3,14 +3,16 @@
 <div class="well well-sm">
 
   <div class="row">
-      <div class="col-sm-8 editbold ct" style="position: relative;
+    <div class="col-sm-8 editbold ct" style="position: relative;
       top: 0px;
       bottom: 0;
       left: 0;
       height: 800px;
-      overflow-y: scroll;">
+      overflow-y: scroll;"
+      id="myScan">
       <%= image_tag findlog(@mystart, @showid, 1) %>
       <%= image_tag findlog(@mystart, @showid, 2) %>
+      <%= image_tag findlog(@mystart, @showid, 3) %>
     </div>
     <div class="col-sm-4 editbold ct" style="position: relative;
       top: 0px;
@@ -18,7 +20,6 @@
       left: 0;
       height: 800px;
       overflow-y: scroll;">
-
     <p><%= @showname %> - <%= @weekof %></p>
 
     <button class="btn btn-small btn-success"
@@ -67,8 +68,8 @@
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Blank") %></div>
           <div class="col-sm-10 editbold rt">Log is incorrect - Move to Import</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Move") %></div>
-          <div class="col-sm-10 editbold rt">Log has multiple weeks - Mark as Extra</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Extra") %></div>
+          <!-- <div class="col-sm-10 editbold rt">Log has multiple weeks - Mark as Extra</div>
+          <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Extra") %></div> -->
         </div>
       </div>
 

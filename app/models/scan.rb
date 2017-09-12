@@ -3,9 +3,10 @@ class Scan < ActiveRecord::Base
   scope :scanscount, ->(mystart) { where(monday: mystart, specialservices: true).uniq.pluck(:performance_id).count }
   scope :ssscanscount, ->(mystart) { where(monday: mystart, specialservices: false).uniq.pluck(:performance_id).count }
 
-  scope :unprocessed, ->() {
-    where(isprocessed: false).limit(1)
-  }
+  scope :unprocessed, ->() { where(isprocessed: false).limit(1) }
+  scope :recall, -> (myMon, myShowid, mySS) { where(monday: myMon,
+    performance_id: myShowid,
+    specialservices: mySS) }
   # scope :anydate, ->(myday) { where(monday: weekstart(myday)) }
 
   validates :performance_id, presence: true

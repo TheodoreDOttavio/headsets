@@ -4,6 +4,9 @@ class VentriesController < ApplicationController
 
     show = Scan.unprocessed
     @mystart = show.first.monday #params[:mystart].to_date
+    @myscan = show.first.id
+    @myscanss = 1
+    @myscanss = 2 if show.first.specialservices
 
     @showname =  Performance.find(show.first.performance_id).name
     @showid =  show.first.performance_id
@@ -53,24 +56,18 @@ class VentriesController < ApplicationController
         obj.quantity = params[rowname][:qty]
         # obj.save
       end
-      #TODO add isprocesed flag to scans
-      ss = false
-      ss = true if params[:productCat].to_i > 20
-      scanobj = Scan.recall(params[:mystart].to_date, params[:showid].to_i, ss)
-      # scanobj = Scan.where(monday: params[:mystart].to_date,
-      #   specialservices: ss).where("\"scans\".\"performance_id\" = '?'", params[:showid].to_i)
-flash[:success] += "---scans found : "
-      flash[:success] += scanobj.count.to_s + "<br>"
+      # Add isprocesed flag to scans
+      scanobj = Scan.find(params[:myscan])
+      scanobj.isprocessed = true
+      # flash[:success] += "---scans found : "
+      # flash[:success] += scanobj.isprocessed.to_s + "<br>"
       # scanobj.save
     when "Blank"
       if params[:productCat].to_i <= 20 then
-        flash[:success] += "Enter 0 values for Infrared shifts<br>"
+        flash[:success] += "Enter 0 values for Infrared Shifts<br>"
       else
-        ss = false
-        ss = true if params[:productCat].to_i > 20
-        scanobj = Scan.where(monday: params[:mystart].to_date,
-          specialservices: ss).where("\"scans\".\"performance_id\" = '?'", params[:showid].to_i)
-        # flash[:success] += "id of scan data to change " + scanobj.id.to_s
+        scanobj = Scan.find(params[:myscan])
+        scanobj.isprocessed = true
         # scanobj.save
       end
     when "Move"

@@ -10,8 +10,8 @@
       height: 800px;
       overflow-y: scroll;"
       id="myScan">
-      <%= image_tag findlog(@mystart, @showid, 1) %>
-      <%= image_tag findlog(@mystart, @showid, 2) %>
+      <%= image_tag findlog(@mystart, @showid, @myscanss) %>
+      <!-- <%= image_tag findlog(@mystart, @showid, 2) %> -->
       <%= image_tag findlog(@mystart, @showid, 3) %>
     </div>
     <div class="col-sm-4 editbold ct" style="position: relative;
@@ -37,6 +37,7 @@
     <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
 
     <%= form_tag("/ventrynew", method: "post") do %>
+      <input value="<%= @myscan %>" type="hidden" name="myscan" id="myscan">
       <input value="<%= @mystart %>" type="hidden" name="mystart" id="mystart">
       <input value="<%= @showid %>" type="hidden" name="showid" id="showid">
 

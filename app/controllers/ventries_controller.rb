@@ -12,16 +12,16 @@ class VentriesController < ApplicationController
     @showid =  show.first.performance_id
 
     #TODO We know the logtype... so categories for headset/loop vs. SS languages
-    @productCats = []
-    productCats = Shortlists.new.productCategories
-    productCats.each do |key, value|
-      @productCats.push([value, key])
-    end
+    # @productCats = []
+    # productCats = Shortlists.new.productCategories
+    # productCats.each do |key, value|
+    #   @productCats.push([value, key])
+    # end
 
-    @languages = [["Theater Audio", 0]]
+    @languages = [] #["Theater Audio", 0]
     languages = Shortlists.new.languages
     languages.each do |key, value|
-      @languages.push([key.to_s, value]) if value >= 3
+      @languages.push([key.to_s, value]) if value >= 1
     end
 
     @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6.days).strftime('%b %d, %Y')
@@ -55,7 +55,7 @@ class VentriesController < ApplicationController
         obj.curtain = params[:mystart].to_date + params[rowname][:weekday].to_i
         obj.eve = params[rowname][:eve]
         obj.quantity = params[rowname][:qty]
-        obj.save
+        # obj.save
       end
       # Add isprocesed flag to scans
       scanobj = Scan.find(params[:myscan])

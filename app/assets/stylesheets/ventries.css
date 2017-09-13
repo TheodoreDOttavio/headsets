@@ -1,14 +1,14 @@
 .previewbox {
-  width: 15%;
+  width: 12%;
   background: rgba(255,255,255,0.69);
   border-radius: 10px;
   border-width: 1px;
   border-color: #000000;
-  margin: 0 0 10% 30%;
+  margin: 0 0 10% 45%;
   padding: 2px;
   position: fixed;
   bottom: 0;
   color: #7e0000;
-  font-size: 1.25em;
+  font-size: 1.1em;
   text-align: right;
 }

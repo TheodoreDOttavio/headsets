@@ -12,7 +12,16 @@
       id="myScan">
       <%= image_tag findlog(@mystart, @showid, @myscanss) %>
       <%= image_tag findlog(@mystart, @showid, 3) %>
-      <%= @remaining %> Unprocessed Logs Found.
+      <div class="previewbox">
+        <%= (@mystart + 0.days).strftime('%a %m-%d-%y')%>
+        <br><%= (@mystart + 1.days).strftime('%a %m-%d-%y')%>
+        <br><%= (@mystart + 2.days).strftime('%a %m-%d-%y')%>
+        <br><%= (@mystart + 3.days).strftime('%a %m-%d-%y')%>
+        <br><%= (@mystart + 4.days).strftime('%a %m-%d-%y')%>
+        <br><%= (@mystart + 5.days).strftime('%a %m-%d-%y')%>
+        <br><%= (@mystart + 6.days).strftime('%a %m-%d-%y')%>
+        <br><%= @remaining %> Logs to do.
+      </div>
     </div>
     <div class="col-sm-4 editbold ct" style="position: relative;
       top: 0px;
@@ -20,14 +29,14 @@
       left: 0;
       height: 800px;
       overflow-y: scroll;">
-    <p><%= @showname %> - <%= @weekof %></p>
+    <p><%= @showname %><br><%= @weekof %></p>
 
     <button class="btn btn-small btn-success"
       role="button" onclick="recognition.start();">Start</button>
     <button class="btn btn-small btn-danger"
       id="pause-record-btn" href="#"
       role="button" onclick="recognition.stop();">Stop</button>
-    <div id="recording-instructions">This App requires the Chrome Browser and microphone access.</div>
+    <div id="recording-instructions">This App requires the Chrome Browser<br>and microphone access.</div>
 
     <textarea id="raw-textarea" placeholder="Translated speach will show up in this text area."></textarea>
 

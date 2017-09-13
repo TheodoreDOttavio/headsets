@@ -12,6 +12,7 @@
       id="myScan">
       <%= image_tag findlog(@mystart, @showid, @myscanss) %>
       <%= image_tag findlog(@mystart, @showid, 3) %>
+      <%= @remaining %> Unprocessed Logs Found.
     </div>
     <div class="col-sm-4 editbold ct" style="position: relative;
       top: 0px;
@@ -46,11 +47,17 @@
         <div class="row">
           <div class="col-sm-10 editbold rt">Infrared Headsets</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:productCat, "10", checked: true) %></div>
-          <div class="col-sm-10 editbold rt">Infrared T-Coil Loops</div>
+          <div class="col-sm-10 editbold rt">T-Coil Loops</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:productCat, "20") %></div>
         </div>
-        <input value="true" type="hidden" name="nextScan" id="nextScan">
+        <div class="row">
+          <div class="col-sm-10 edit rt">Return to add Loops</div>
+          <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "false") %></div>
+          <div class="col-sm-10 edit rt">Headsets Only</div>
+          <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "true", checked: true) %></div>
+        </div>
       <% else %>
+        <input value="50" type="hidden" name="productCat" id="productCat">
         <div class="row">
           <div class="col-sm-10 editbold rt">Return to add another language</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "false", checked: true) %></div>
@@ -70,21 +77,18 @@
       <div id="myResults">
         <!-- js added form rows replaces these options -->
         <!-- Checkbox for empty/odd/incorrect sheets -->
-        <div class="row">
-          <!-- <div class="col-sm-10 editbold rt">Data Entry - Do Nothing Special</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Data", checked: true) %></div> -->
-          <% if @myscanss != 1 then %>
-          <div class="col-sm-10 editbold rt">Log is blank - Mark as Complete</div>
+        <div class="row">          <% if @myscanss != 1 then %>
+          <div class="col-sm-10 editbold rt">Mark as Complete (blank logs)</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Blank") %></div>
           <% end %>
-          <div class="col-sm-10 editbold rt">Log is incorrect - Move to Import</div>
+          <div class="col-sm-10 editbold rt">Move to re-Import</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Move") %></div>
           <!-- <div class="col-sm-10 editbold rt">Log has multiple weeks - Mark as Extra</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Extra") %></div> -->
         </div>
       </div>
 
-      <%= submit_tag 'Looks good? Save it!', class: "btn btn-sm btn-primary" %>
+      <%= submit_tag 'Do the Things', class: "btn btn-sm btn-primary" %>
     <% end %>
 </div>
 

@@ -25,43 +25,65 @@ class VentriesController < ApplicationController
     end
 
     @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6.days).strftime('%b %d, %Y')
+
+    @remaining = Scan.unprocessedCount.count
   end
 
 
   def new
     #submit data - and reload ventries#index
     # flash[:success] = "" + params[:task] + "<br>"
-    #TODO rethink this.. adding languages needs a check for last one:Done
 
     case params[:task]
     when "Data"
       for i in 0..(params[:shiftcount].to_i)-1 do
         obj = Distributed.new()
         obj.performance_id = params[:showid].to_i
-        obj.product_id = params[:productCat].to_i
 
         obj.language = params[:language].to_i
-        case params[:productCat].to_i
-        when 10, 20
+        productCat = params[:productCat].to_i
+
+        case params[:language].to_i
+        when 1
+          productCat = 40
+        when 2
+          productCat = 30
+        end
+
+        case productCat
+        when 10
+          obj.product_id = 6
+          obj.language = 0
+          obj.isinfrared = true
+        when 20
+          obj.product_id = 7
           obj.language = 0
           obj.isinfrared = true
         when 30
-          obj.language = 2
+          obj.product_id = 4
+          # obj.language = 2
         when 40
-          obj.language = 1
+          obj.product_id = 5
+          # obj.language = 1
+        when 50
+          obj.product_id = 4
         end
 
         rowname = 'ventry' + i.to_s
-        obj.curtain = params[:mystart].to_date + params[rowname][:weekday].to_i
+        obj.curtain = params[:mystart].to_date + params[rowname][:weekday].to_i.days
         obj.eve = params[rowname][:eve]
         obj.quantity = params[rowname][:qty]
-        # obj.save
+        obj.save
       end
+
       # Add isprocesed flag to scans
-      scanobj = Scan.find(params[:myscan])
-      scanobj.isprocessed = true
-      # scanobj.save
-      flash[:success] = "Week of #{params[:mystart].to_date.strftime('%b %d')} for show #{params[:showid]} Added.<br>"
+      if params[:nextScan] == "true" then
+        scanobj = Scan.find(params[:myscan])
+        scanobj.isprocessed = true
+        scanobj.save
+      end
+
+      flash[:success] = "Added #{Product.find(obj.product_id).name} for week of #{params[:mystart].to_date.strftime('%b %d')}.<br>"
     when "Blank"
       if params[:productCat].to_i <= 20 then
         flash[:error] = "Enter 0 values for Infrared Shifts<br>"
@@ -75,10 +97,13 @@ class VentriesController < ApplicationController
       scanobj = Scan.find(params[:myscan])
       ss = 1
       ss = 2 if scanobj.specialservices
-      movefile = findlog(scanobj.monday, scanobj.id, ss)
-      flash[:success] = "Moved : " + movefile.to_s + "<br>"
-      # require 'fileutils'
-      # FileUtils.mv myfile, myplacedpath + myplacedfile
+      myfile = findlog(scanobj.monday, scanobj.performance_id, ss)
+      scanobj.destroy
+
+      require 'fileutils'
+
+      FileUtils.mv "app/assets/images/" + myfile, "app/assets/images/ftp/" + myfile.split('/').last
+      flash[:success] = "Moved : " + myfile.to_s + "<br>"
     # when "Extra"
     end
 

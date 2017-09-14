@@ -1,4 +1,6 @@
 class Scan < ActiveRecord::Base
+  belongs_to :performance
+  
   # Scopes for Paperwork and Reports
   scope :scanscount, ->(mystart) { where(monday: mystart, specialservices: true).uniq.pluck(:performance_id).count }
   scope :ssscanscount, ->(mystart) { where(monday: mystart, specialservices: false).uniq.pluck(:performance_id).count }

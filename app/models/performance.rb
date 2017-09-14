@@ -3,6 +3,7 @@ class Performance < ActiveRecord::Base
 
   has_many :products, through: :cabinets
   has_many :cabinets, dependent: :destroy
+  has_many :scans
 
   accepts_nested_attributes_for :cabinets,
                                 reject_if: :all_blank,

@@ -77,11 +77,14 @@ var parseToForm = function (txt) {
   var days = {"monday":"Mon", "tuesday":"Tue", "wednesday":"Wed", "thursday":"Thu", "friday":"Fri", "saturday":"Sat", "sunday":"Sun"}
   var numbs = {"zero":"0", "one":1, "two":2, "to":2, "too":2, "three":3, "four":4, "for":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9}
   var mystartoffset = {"Mon":0, "Tue":1, "Wed":2, "Thu":3, "Fri":4, "Sat":5, "Sun":6}
-  var wordArr = txt.split(' ');
   var buildShows = [];
   var buildQty = [];
   var buildhtm = '';
   var eveningShift = true; //
+  
+  txt = txt.replace("th ", " ");
+  txt = txt.replace("rd ", " ");
+  var wordArr = txt.split(' ');
 
   for (var i=0; i<wordArr.length; i++) {
     if (days[wordArr[i].toLowerCase()]){

@@ -42,10 +42,11 @@
 
     <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
 
-    <button class="btn btn-small btn-primary"
+    <button class="btn btn-sm btn-primary"
     id="pause-record-btn" href="#"
     role="button" onclick="parseToForm('Tuesday 0 Wednesday 0 Wednesday 0 Thursday 0 Friday 0 Saturday 0 Saturday 0 Sunday 0');">Offline - Manual Edit</button>
-
+    <hr>
+    
     <%= form_tag("/ventrynew", method: "post") do %>
       <input value="<%= @myscan %>" type="hidden" name="myscan" id="myscan">
       <input value="<%= @mystart %>" type="hidden" name="mystart" id="mystart">
@@ -60,25 +61,21 @@
           <div class="col-sm-2 lt"><%= radio_button_tag(:productCat, "20") %></div>
         </div>
         <div class="row">
-          <div class="col-sm-10 edit rt">Return to add Loops</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "false") %></div>
-          <div class="col-sm-10 edit rt">Headsets Only</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "true", checked: true) %></div>
+          <div class="col-sm-10 editbold rt">Save and Continue</div>
+          <div class="col-sm-2 lt"><%= check_box_tag :nextScan, 'true', true %></div>
         </div>
       <% else %>
         <input value="50" type="hidden" name="productCat" id="productCat">
-        <div class="row">
-          <div class="col-sm-10 editbold rt">Return to add another language</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "false", checked: true) %></div>
-          <div class="col-sm-10 editbold rt">Save and Continue</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:nextScan, "true") %></div>
-        </div>
         <div class="row">
           <div class="col-sm-6 editbold rt">
             Language
           </div>
           <div class="col-sm-6 editbold rt">
             <%= select(@object, :language, @languages) %>
+          </div>
+          <div class="row">
+            <div class="col-sm-10 editbold rt">Save and Continue</div>
+            <div class="col-sm-2 lt"><%= check_box_tag :nextScan, 'true', false %></div>
           </div>
         </div>
       <% end %>

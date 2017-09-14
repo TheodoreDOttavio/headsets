@@ -121,7 +121,7 @@ class DistributedsController < ApplicationController
           # update one
           obj = Distributed.find(myparams[:id])
           obj.update_attributes(myparams)
-          myflashtext += ' updated - ' + myparams[:quantity] + ' on '
+          myflashtext += ' <br>updated - ' + myparams[:quantity] + ' on '
           myflashtext += myparams[:curtain].to_date.strftime('%a E (%m / %d)')
           # myflashtext = myflashtext + myparams[:language].key(distributed.language.to_i)
         else
@@ -135,7 +135,7 @@ class DistributedsController < ApplicationController
               obj.save
             end
          end
-          myflashtext += ' added - ' + myparams[:quantity] + ' on '
+          myflashtext += ' <br>added - ' + myparams[:quantity] + ' on '
           myflashtext += myparams[:curtain].to_date.strftime('%a E (%m / %d)')
        end
       else
@@ -143,7 +143,7 @@ class DistributedsController < ApplicationController
         if myparams[:id] != ''
           Distributed.find(myparams[:id]).destroy
 
-          myflashtext += ' deleted - '
+          myflashtext += ' <br>deleted - '
           myflashtext += myparams[:curtain].to_date.strftime('%a E (%m / %d)')
           # myflashtext += myparams[:language].key(distributed.language.to_i)
         end
@@ -152,8 +152,30 @@ class DistributedsController < ApplicationController
       i += 1
     end
 
+    # and then add a processed flag to the log scan
+
+    scanobj = nil
+    scanobj = Scan.find_by(monday: weekstart(myparams[:curtain].to_datetime),
+      performance_id: myparams[:performance_id].to_i,
+      specialservices: false)
+    if !scanobj.nil? then
+      scanobj.isprocessed = true
+      scanobj.save
+      myflashtext += ' <br>Daily Log checked in'
+    end
+
+    scanobj = nil
+    scanobj = Scan.find_by(monday: weekstart(myparams[:curtain].to_datetime),
+      performance_id: myparams[:performance_id].to_i,
+      specialservices: true)
+    if !scanobj.nil? then
+      scanobj.isprocessed = true
+      scanobj.save
+      myflashtext += ' <br>Special Services Log checked in'
+    end
+
     show_name = Performance.find(myparams[:performance_id])
-    flash[:success] = 'Distribution:' + myflashtext + ' for ' + show_name.name
+    flash[:success] = 'For ' + show_name.name + ":<br>" + myflashtext
     mystart = params[:distributed0][:curtain].to_date
     redirect_to distributeds_path(mystart: mystart)
 
@@ -215,12 +237,12 @@ class DistributedsController < ApplicationController
       else
         # A data cleaner
         #  for legacy data
-        distributedsearch.each do |_doppleganger|
+        # distributedsearch.each do |_doppleganger|
           if distributedsearch.count != 1
             Distributed.find(distributedsearch.last.id).destroy
             flash[:error] = 'Duplicate entry was removed'
           end
-        end
+        # end
         # End data cleaner
 
         weekofdistributed[i] = Distributed.new(performance_id: performanceid,

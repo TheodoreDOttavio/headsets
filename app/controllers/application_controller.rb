@@ -16,8 +16,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def weekstart
-    astart = DateTime.now.utc.beginning_of_day
+  def weekstart (astart = DateTime.now.utc.beginning_of_day)  
     loop do
       break if astart.wday == 1
       astart -= 1.day

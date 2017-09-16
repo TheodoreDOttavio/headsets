@@ -72,8 +72,17 @@ class VentriesController < ApplicationController
         rowname = 'ventry' + i.to_s
         obj.curtain = params[:mystart].to_date + params[rowname][:weekday].to_i.days
         obj.eve = params[rowname][:eve]
-        obj.quantity = params[rowname][:qty]
-        obj.save
+        obj.quantity = params[rowname][:qty].to_i
+        #No need to save 0 values on anything that is not infrared
+        if obj.quantity != 0
+          obj.save
+        else
+          puts "----------------Zero Qty!"
+          if obj.isinfrared == true
+            puts "----------------saving infrared"
+            obj.save
+          end
+        end
       end
 
       # Add isprocesed flag to scans

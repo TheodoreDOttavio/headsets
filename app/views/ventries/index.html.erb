@@ -42,11 +42,8 @@
 
     <p>Say only the theater show day, and then headset quantity in order from Mon-Sun.</p>
 
-    <button class="btn btn-sm btn-primary"
-    id="pause-record-btn" href="#"
-    role="button" onclick="parseToForm('Tuesday 0 Wednesday 0 Wednesday 0 Thursday 0 Friday 0 Saturday 0 Saturday 0 Sunday 0');">Offline - Manual Edit</button>
     <hr>
-    
+
     <%= form_tag("/ventrynew", method: "post") do %>
       <input value="<%= @myscan %>" type="hidden" name="myscan" id="myscan">
       <input value="<%= @mystart %>" type="hidden" name="mystart" id="mystart">
@@ -83,6 +80,9 @@
       <div id="myResults">
         <!-- js added form rows replaces these options -->
         <!-- Checkbox for empty/odd/incorrect sheets -->
+        <button class="btn btn-sm btn-primary"
+        id="pause-record-btn" href="#"
+        role="button" onclick="parseToForm('Tuesday 0 Wednesday 0 Wednesday 0 Thursday 0 Friday 0 Saturday 0 Saturday 0 Sunday 0');">Offline - Manual Edit</button>
         <div class="row">          <% if @myscanss != 1 then %>
           <div class="col-sm-10 editbold rt">Mark as Complete (blank logs)</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Blank") %></div>

@@ -1,11 +1,11 @@
 class Scan < ActiveRecord::Base
   belongs_to :performance
-  
+
   # Scopes for Paperwork and Reports
   scope :scanscount, ->(mystart) { where(monday: mystart, specialservices: true).uniq.pluck(:performance_id).count }
   scope :ssscanscount, ->(mystart) { where(monday: mystart, specialservices: false).uniq.pluck(:performance_id).count }
 
-  scope :unprocessed, ->() { where(isprocessed: false).order(id: :desc).limit(1) }
+  scope :unprocessed, ->() { where(isprocessed: false, specialservices: true).order(id: :desc).limit(1) }
   scope :unprocessedCount, ->() { select(:id).where(isprocessed: false) }
   # scope :anydate, ->(myday) { where(monday: weekstart(myday)) }
 

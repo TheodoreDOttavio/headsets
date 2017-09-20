@@ -26,7 +26,7 @@ class DistributedsController < ApplicationController
     # Display where the data is at - overview of what has been entered
     @weektoedit = []
     @weekstartstoedit = []
-    for i in 1..21 do # 140
+    for i in 1..210 do # 140
       mystart = weekstart - (i * 7)
 
       # add in some info about what has been entered

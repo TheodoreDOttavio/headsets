@@ -81,9 +81,12 @@ var parseToForm = function (txt) {
   var buildQty = [];
   var buildhtm = '';
   var eveningShift = true; //
+
+  txt += " "; //to catch a digit at the end
+  txt = txt.replace(/(th)\s/g, ' ');
+  txt = txt.replace(/(rd)\s/g, ' ');
+  txt = txt.replace(/(st)\s/g, ' ');
   
-  txt = txt.replace("th ", " ");
-  txt = txt.replace("rd ", " ");
   var wordArr = txt.split(' ');
 
   for (var i=0; i<wordArr.length; i++) {

@@ -11,13 +11,6 @@ class VentriesController < ApplicationController
     @showname =  Performance.find(show.first.performance_id).name
     @showid =  show.first.performance_id
 
-    #TODO We know the logtype... so categories for headset/loop vs. SS languages
-    # @productCats = []
-    # productCats = Shortlists.new.productCategories
-    # productCats.each do |key, value|
-    #   @productCats.push([value, key])
-    # end
-
     @languages = [] #["Theater Audio", 0]
     languages = Shortlists.new.languages
     languages.each do |key, value|
@@ -77,9 +70,9 @@ class VentriesController < ApplicationController
         if obj.quantity != 0
           obj.save
         else
-          puts "----------------Zero Qty!"
+          # puts "----------------Zero Qty!"
           if obj.isinfrared == true
-            puts "----------------saving infrared"
+            # puts "----------------saving infrared"
             obj.save
           end
         end
@@ -93,6 +86,8 @@ class VentriesController < ApplicationController
       end
 
       flash[:success] = "Added #{Product.find(obj.product_id).name} for week of #{params[:mystart].to_date.strftime('%b %d')}.<br>"
+      #new?action=index&controller=distributeds&mystart=2014-07-28T00%3A00%3A00%2B00%3A00&performance_id=2
+
     when "Blank"
       if params[:productCat].to_i <= 20 then
         flash[:error] = "Enter 0 values for Infrared Shifts<br>"

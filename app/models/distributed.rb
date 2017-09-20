@@ -60,7 +60,7 @@ class Distributed < ActiveRecord::Base
 
   scope :allweeks, ->(wkstart) {
     allweeks = []
-    for i in 1..100 do
+    for i in 1..200 do
       mystart = wkstart - (i * 7)
       myend = mystart + 6
       # check to see if there's any data at all on that week

@@ -80,17 +80,20 @@
       <div id="myResults">
         <!-- js added form rows replaces these options -->
         <!-- Checkbox for empty/odd/incorrect sheets -->
-        <button class="btn btn-sm btn-primary"
-        id="pause-record-btn" href="#"
-        role="button" onclick="parseToForm('Tuesday 0 Wednesday 0 Wednesday 0 Thursday 0 Friday 0 Saturday 0 Saturday 0 Sunday 0');">Offline - Manual Edit</button>
-        <div class="row">          <% if @myscanss != 1 then %>
-          <div class="col-sm-10 editbold rt">Mark as Complete (blank logs)</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Blank") %></div>
+        <div class="row">
+          <button class="btn btn-sm btn-primary"
+          id="pause-record-btn" href="#"
+          role="button" onclick="parseToForm('Tuesday 0 Wednesday 0 Wednesday 0 Thursday 0 Friday 0 Saturday 0 Saturday 0 Sunday 0');">Offline - Manual Edit</button>
+          <%= link_to 'Full Editor', new_distributed_path(params.merge(:mystart => @mystart,
+            :performance_id => @showid)), :class => 'btn btn-sm btn-warning', :target => '_blank'%>
+        </div>
+        <div class="row">
+          <% if @myscanss != 1 then %>
+            <div class="col-sm-10 editbold rt">Mark as Complete (blank logs)</div>
+            <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Blank") %></div>
           <% end %>
           <div class="col-sm-10 editbold rt">Move to re-Import</div>
           <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Move") %></div>
-          <!-- <div class="col-sm-10 editbold rt">Log has multiple weeks - Mark as Extra</div>
-          <div class="col-sm-2 lt"><%= radio_button_tag(:task, "Extra") %></div> -->
         </div>
       </div>
 

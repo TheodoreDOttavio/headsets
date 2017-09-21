@@ -11,10 +11,12 @@
   <%= render 'layouts/header' %>
     <div class="container-fluid">
       <% flash.each do |key, value| %>
+        <% if key != 'html_safe' %>
          <div class="alert alert-<%= key %> alert-dismissible">
            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
            <%=raw value %>
          </div>
+       <% end %>
       <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>

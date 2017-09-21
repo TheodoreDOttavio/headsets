@@ -86,7 +86,10 @@ class VentriesController < ApplicationController
       end
 
       flash[:success] = "Added #{Product.find(obj.product_id).name} for week of #{params[:mystart].to_date.strftime('%b %d')}.<br>"
-      #new?action=index&controller=distributeds&mystart=2014-07-28T00%3A00%3A00%2B00%3A00&performance_id=2
+      #distributeds/new?action=index&controller=distributeds&mystart= &performance_id=
+      flash[:html_safe] = true
+      flash[:success] += " <a href='#{root_url}/distributeds/new?action=index&controller=ventries&mystart=#{params[:mystart]}&performance_id=#{params[:showid].to_i}'
+      class='btn btn-sm btn-warning'>Review in Editor</a>"
 
     when "Blank"
       if params[:productCat].to_i <= 20 then

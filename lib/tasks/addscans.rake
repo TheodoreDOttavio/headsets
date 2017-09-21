@@ -96,21 +96,12 @@ namespace :db do
 
 
   task transposeproduct: :environment do
-    puts "Converting product ID's in Distributeds datum to a product category ID"
-    # Convert produt ID's to Product type
-    # 10 Infrared
-    # 20 Loop
-    # 30 Descriptive
-    # 40 iCaption
-    # 50 Translation
-    # NOTE use  = Shortlists.new.productCategories for name....
-    #scope :infrared, -> { where(product_id: [1, 3, 6, 7]) }
-    #scope :translation, -> { where(product_id: [4, 5], language: [2..20]) }
-    #scope :icapdesc, -> { where(product_id: [4, 5], language: [0..1]) }
-
-    transposeHash = {1 => 10, 3 => 20, 6 => 10, 7 => 20}
-    # 4 => 50, 5 => 40 Need to make use of the language field in each Distributeds record.
-
-    #NOTE split translation by language into descriptive and translation
+    puts "Converting product ID's in Distributeds datum to unify headsets and loops"
+    @change = Distributed.where(product_id: 1).update_all(product_id: 6)
+    @change = Distributed.where(product_id: 3).update_all(product_id: 7)
+    @change = Cabinet.where(product_id: 1).update_all(product_id: 6)
+    # leave a hint. no change to batteries @change = Cabinet.where(product_id: 2).update_all(product_id: 8)
+    @change = Cabinet.where(product_id: 3).update_all(product_id: 7)
+    #TODO move all icap to r4 by looking at language_id
   end
 end

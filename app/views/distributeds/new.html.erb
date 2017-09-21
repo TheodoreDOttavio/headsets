@@ -24,6 +24,8 @@
 
 <%= link_to "Cancel", distributeds_path(mystart: @mystart),
   class: "btn btn-sm btn-warning" %>
+<%= link_to "Voice Entry", ventry_path,
+  class: "btn btn-sm btn-primary" %>
 
 <%= form_tag(:action => 'create', :method => 'post', :id => 1, :mystart => params[:mystart]) %>
 <%= submit_tag 'Save Changes', class: "btn btn-sm btn-primary" %>

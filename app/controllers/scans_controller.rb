@@ -32,7 +32,7 @@ class ScansController < ApplicationController
         FileUtils.mkdir_p myplacedpath
         if !Dir.glob(myplacedpath + myplacedfile).empty?
           flash[:error] = 'Scanned File exists!'
-          redirect_to scans_path
+          # redirect_to scans_path
         else
           FileUtils.mv myfile, myplacedpath + myplacedfile
 
@@ -52,11 +52,13 @@ class ScansController < ApplicationController
       end
       # find the next image to sort:
       jpegfilelist = Dir.glob('app/assets/images/ftp/*.jpg')
-      @thisimage = 'ftp/' + jpegfilelist.first.split('/').last
+      @thisimage = 'ftp/' + jpegfilelist.first.split('/').last if jpegfilelist != []
+      redirect_to scans_path if jpegfilelist == []
     end
 
     # Performances
-    @performances = Performance.nowshowing.select(:name, :id).order(:name) # Performance.select(:name, :id).order(:name)
+    # @performances = Performance.nowshowing.select(:name, :id).order(:name)
+    @performances = Performance.select(:name, :id).order(:name)
 
     # Type of paperwork being uploaded
     @paperformat = []

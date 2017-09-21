@@ -104,4 +104,10 @@ namespace :db do
     @change = Cabinet.where(product_id: 3).update_all(product_id: 7)
     #TODO move all icap to r4 by looking at language_id
   end
+
+  task fixbadcode: :environment do
+    puts "one time fixer"
+    #Does the file attachment work for special services???
+    @change = Scan.where(id: 36583).update_all(specialservices: false)
+  end
 end

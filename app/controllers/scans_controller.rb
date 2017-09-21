@@ -13,7 +13,7 @@ class ScansController < ApplicationController
     @lastformat = 1
 
     # From a post, so move the file, and set the selections to save time
-    #  is the post a newly uploaded file vs going through the images/ftp directory
+    #  is the post a newly uploaded file vs going through the assets/images//ftp directory
     if params[:Data]
       @thisfilename = params[:Data].original_filename
       @thisimage = params[:Data].tempfile
@@ -37,11 +37,13 @@ class ScansController < ApplicationController
           FileUtils.mv myfile, myplacedpath + myplacedfile
 
           # record the new scan in the Scans db
-          ss = params[:paperworkformat] == 1 ? true : false
+          ss = false
+          ss = true if params[:paperworkformat].to_i == 2
 
           mondayarray = params[:placeweek].split('-')
           monday = DateTime.new(mondayarray[0].to_i, mondayarray[1].to_i, mondayarray[2].to_i)
-          obj = Scan.new(performance_id: params[:placeperformance], monday: monday, specialservices: ss)
+          obj = Scan.new(performance_id: params[:placeperformance],
+            monday: monday, specialservices: ss)
           obj.save
         end
 
@@ -57,13 +59,13 @@ class ScansController < ApplicationController
     end
 
     # Performances
-    # @performances = Performance.nowshowing.select(:name, :id).order(:name)
-    @performances = Performance.select(:name, :id).order(:name)
+    @performances = Performance.nowshowing.select(:name, :id).order(:name)
+    # @performances = Performance.select(:name, :id).order(:name)
 
     # Type of paperwork being uploaded
     @paperformat = []
     @paperformat.push(['Infrared Daily Log', 1])
-    @paperformat.push(['Special Services Log ', 2])
+    @paperformat.push(['Special Services Log', 2])
 
     # Show a list of weeks going back 3 years:
     @completeweeks = Distributed.completeweeks(weekstart)

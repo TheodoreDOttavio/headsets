@@ -17,10 +17,12 @@ module ApplicationHelper
               performanceid.to_s + '/' +
               performanceid.to_s + '-' +
               astart.strftime('%Y-%m-%d') + '-' + format.to_s + '.jpg'
+    puts "-------------findlog called :" + 'app/assets/images/' + logfile
     return logfile if File.exist?('app/assets/images/' + logfile)
   end
 
 end
+
 
 def archivedate(databasedate)
   mydatearray = databasedate.to_s[0..9].split('-').map(&:to_i)

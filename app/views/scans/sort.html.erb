@@ -3,13 +3,15 @@
 <div class="well well-sm">
 
 <h1>ID this Log</h1>
-<h2>This renames the file and creates data about it</h2>
 
 <%= form_tag("/scanssorting", method: "post") do %>
 
 <div class="row">
-  <div class="col-sm-3 editbold ct"><%= select_tag "placeperformance", options_from_collection_for_select(@performances, "id", "name", @lastperformanceid) %></div>
+  <div class="col-sm-3 editbold ct"><%= select_tag "placeperformance", options_from_collection_for_select(@performances, "id", "name", @lastperformanceid) %>
+    <%= link_to "Create a Show", new_performance_path, class: "btn btn-small btn-primary" %>
+  </div>
   <div class="col-sm-3 editbold lt"><%= select(@object, :placeweek, options_for_select(@completeweeks, @lastweek)) %></div>
+
   <div class="col-sm-3 editlight ct">
     <% @paperformat.each do |o| %>
       <%= o[0] %>
@@ -21,9 +23,15 @@
     <% end %>
   </div>
   <%= hidden_field_tag :placefile, @thisimage %>
-  <div class="col-sm-2 editbold ct"><%= submit_tag 'Attach File', class: "btn btn-sm btn-primary" %></div>
+  <div class="col-sm-2 editbold ct"><%= submit_tag 'Attach File', class: "btn btn-sm btn-primary" %>
+    <%= @remaining %> remaining
+  </div>
 </div>
 <% end %>
+
+<div class="row">
+
+</div>
 
 <%= image_tag @thisimage %>
 

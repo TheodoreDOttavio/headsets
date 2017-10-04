@@ -54,6 +54,7 @@ class ScansController < ApplicationController
       end
       # find the next image to sort:
       jpegfilelist = Dir.glob('app/assets/images/ftp/*.jpg')
+      @remaining = jpegfilelist.length
       @thisimage = 'ftp/' + jpegfilelist.first.split('/').last if jpegfilelist != []
       redirect_to scans_path if jpegfilelist == []
     end

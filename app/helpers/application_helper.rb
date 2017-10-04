@@ -17,7 +17,6 @@ module ApplicationHelper
               performanceid.to_s + '/' +
               performanceid.to_s + '-' +
               astart.strftime('%Y-%m-%d') + '-' + format.to_s + '.jpg'
-    puts "-------------findlog called :" + 'app/assets/images/' + logfile
     return logfile if File.exist?('app/assets/images/' + logfile)
   end
 

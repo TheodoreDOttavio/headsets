@@ -34,3 +34,93 @@
   padding: 5px;
   margin: 10px 10px 4px 10px;
 }
+
+
+
+
+.ssdistcontainer {
+  display: grid;
+  grid-template-columns: 7em repeat(9, [col] auto ) 50%;
+  grid-template-areas:
+    "interactive header header header header header header header header header";
+  "box box box box box box box box";
+  grid-gap: 0em;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000;
+  padding: .25em;
+}
+
+.distcontainer {
+  display: grid;
+  grid-template-columns: 7em 1em repeat(2, [col] auto ) 50%;
+  grid-template-areas:
+    "interactive interactive header header ";
+    "box box box box";
+  grid-gap: 0em;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000;
+  padding: .25em;
+}
+
+.ssdistheader {
+  grid-column: 2 / 10;
+	grid-row: 1;
+  grid-area: header;
+  text-align: center;
+  font-size: 1em;
+}
+
+.distheader {
+  grid-column: 1 / 4;
+	grid-row: 1;
+  grid-area: header;
+  text-align: center;
+  font-size: 1em;
+}
+
+.distinteractive {
+  background-color: #ddd;
+  color: #000;
+  padding: 2px;
+  text-align: center;
+  font-size: .75em;
+}
+
+.distbox {
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000;
+  color: #000;
+  padding: 2px;
+  text-align: center;
+  font-size: .75em;
+}
+
+.distbox:nth-child(even) {
+  background-color: #eee;
+}
+
+.ssdistpaperwork {
+	grid-column: 11;
+	grid-row: 1 / 11;
+  background-color: #fff;
+  color: #000;
+  padding: 2px;
+  text-align: center;
+  font-size: 1em;
+}
+
+.distpaperwork {
+	grid-column: 5;
+	grid-row: 1 / 20;
+  background-color: #fff;
+  color: #000;
+  padding: 2px;
+  text-align: center;
+  font-size: 1em;
+}

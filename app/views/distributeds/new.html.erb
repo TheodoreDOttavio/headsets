@@ -25,14 +25,14 @@
     <% @weekofdistributed["data_#{shift}"].each do |dist| %>
       <%= fields_for dist do |f| %>
       <div class="distbox shift<%= shift %> <%= (dist.product_id == 6) ? "prod1" : "prod2" %>" >
-          <%= f.hidden_field :id, value:dist.id %>
-          <%= f.hidden_field :curtain, value:dist.curtain %>
-          <%= f.hidden_field :eve, value:dist.eve %>
-          <%= f.hidden_field :performance_id, value:dist.performance_id %>
-          <%= f.hidden_field :product_id, value:dist.product_id %>
-          <%= f.hidden_field :language, value:dist.language %>
+        <%= f.hidden_field :id, value:dist.id %>
+        <%= f.hidden_field :curtain, value:dist.curtain %>
+        <%= f.hidden_field :eve, value:dist.eve %>
+        <%= f.hidden_field :performance_id, value:dist.performance_id %>
+        <%= f.hidden_field :product_id, value:dist.product_id %>
+        <%= f.hidden_field :language, value:dist.language %>
 
-          <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
+        <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 1000 %>
       </div>
       <% end %>
     <% end %>
@@ -47,7 +47,10 @@
     <%= image_tag findlog(@mystart, @performance.id, 2) %>
   </div>
 
-  <div class="ssdistheader">Show Name</div>
+  <div class="ssdistheader">
+    <%= @performance.name %><br>
+    <%= @weekof %>
+  </div>
   <div class="distinteractive">save cancel</div>
   <!--shift00-00 [shift0-9]-[00-date/lang] -->
   <!--[0=label]-[0=date label] -->

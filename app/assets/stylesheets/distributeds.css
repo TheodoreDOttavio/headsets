@@ -171,6 +171,7 @@
 .shift12 { grid-row: 15; background-color: #eee; }
 .shift13 { grid-row: 16; }
 .shift14 { grid-row: 17; background-color: #eee; }
+
 .prodlabel { grid-column: 1; }
 .prod1 { grid-column: 2; }
 .prod2 { grid-column: 3; }

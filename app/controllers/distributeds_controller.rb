@@ -115,14 +115,51 @@ class DistributedsController < ApplicationController
       end
     end
 
-    # weekofdistributed[i] = Distributed.new(performance_id: performanceid,
-    #    curtain: thisdate,
-    #    eve: thiseve,
-    #    product_id: productid,
-    #    language: thislang,
-    #    representative: distributedsearch.first.representative,
-    #    id: distributedsearch.first.id,
-    #    quantity: distributedsearch.first.quantity)
+    languages = Shortlists.new.languages
+    languages.delete(:Infrared)
+    @weekofssdistributed = {}
+    existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: [6..7])
+    thiseve = false
+    thisdate = @mystart
+
+    (0..13).each do |shift|
+      label = thisdate.strftime('%a')
+      thiseve ? label += " Eve  " : label += " Mat  "
+      label += thisdate.strftime('%-m-%-d')
+
+      @weekofssdistributed["label_#{shift}"] = label
+      @weekofssdistributed["data_#{shift}"] = []
+      languages.each do |key, language|
+        product = 4
+        product = 5 if language == 1
+        foundone = false
+        existingdist.each do |e|
+          if thisdate == e.curtain && thiseve == e.eve && product == e.product_id then
+            @weekofssdistributed["data_#{shift}"].push(e)
+            foundone = true
+          end
+        end
+        if foundone == false then
+          emptydist = Distributed.new(performance_id: params[:performance_id],
+            curtain: thisdate,
+            eve: thiseve,
+            product_id: product,
+            language: language,
+            isinfrared: false,
+            id: 0)
+          @weekofssdistributed["data_#{shift}"].push(emptydist)
+        end
+      end
+
+      if thiseve == false then
+        thiseve = true
+      else
+        thiseve = false
+        thisdate = thisdate + 1.day
+      end
+
+    end
+
   end
 
 

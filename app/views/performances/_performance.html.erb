@@ -13,5 +13,5 @@
   <div class="col-sm-3 editbold lt"><%= performance.theater_name %></div>
   <div class="col-sm-3 editlight lt"><%= performance.theater_company %></div>
   <% end %>
-<div class="col-sm-2 editbold lt"><%= link_to "Edit " + performance.name, edit_performance_path(performance), class: "btn btn-sm btn-warning" %></div>
+<div class="col-sm-2 editbold lt"><%= link_to "Edit " + performance.name[0..15], edit_performance_path(performance), class: "btn btn-sm btn-warning" %></div>
 </div>

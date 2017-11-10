@@ -13,26 +13,26 @@
     <% end %>
     <%= link_to p[0], new_distributed_path(params.merge(:mystart => params[:mystart],
       :performance_id => p[1])),
-      :class => p[2] %>
+      :class => p[2], :style => 'width: 10em;' %>
   </div>
   <% end %>
 </div>
 
 <div class="distinfocontainer">
   <div class="distpickbox"><%= link_to '2 mo', distributeds_path(params.merge(:myweekslist => 8)),
-    class: "btn btn-sm btn-primary" %></div>
+    class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
   <div class="distpickbox"><%= link_to '6 mo', distributeds_path(params.merge(:myweekslist => 24)),
-    class: "btn btn-sm btn-primary" %></div>
+    class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
   <div class="distpickbox"><%= link_to '1 yr', distributeds_path(params.merge(:myweekslist => 52)),
-    class: "btn btn-sm btn-primary" %></div>
+    class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
   <div class="distpickbox"><%= link_to '3 yrs', distributeds_path(params.merge(:myweekslist => 156)),
-    class: "btn btn-sm btn-primary" %></div>
+    class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
   <div class="distpickbox"><%= link_to '5 yrs', distributeds_path(params.merge(:myweekslist => 260)),
-    class: "btn btn-sm btn-primary" %></div>
+    class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
   <div class="distpickbox">&nbsp;</div>
-  <div class="distpickbox"><%= link_to "Empty", distributeds_path, class: "btn btn-sm btn-danger" %></div>
-  <div class="distpickbox"><%= link_to "Partial", distributeds_path, class: "btn btn-sm btn-warning" %></div>
-  <div class="distpickbox"><%= link_to "Complete", distributeds_path, class: "btn btn-sm btn-primary" %></div>
+  <div class="distpickbox"><%= link_to "Empty", distributeds_path, class: "btn btn-sm btn-danger", :style => 'width: 8em;' %></div>
+  <div class="distpickbox"><%= link_to "Partial", distributeds_path, class: "btn btn-sm btn-warning", :style => 'width: 8em;' %></div>
+  <div class="distpickbox"><%= link_to "Complete", distributeds_path, class: "btn btn-sm btn-primary", :style => 'width: 8em;' %></div>
 </div>
 
 <div class="distpickcontainer">
@@ -40,7 +40,7 @@
   <div class="distpickbox">
     <%= link_to weekof["showweekof"],
       distributeds_path(params.merge(:mystart => weekof["startdate"])),
-      class: weekof["buttonclass"] %>
+      class: weekof["buttonclass"], :style => 'width: 14em;' %>
   </div>
   <% end %>
 </div>

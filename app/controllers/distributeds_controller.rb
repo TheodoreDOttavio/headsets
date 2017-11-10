@@ -73,6 +73,45 @@ class DistributedsController < ApplicationController
 
     #Get the Show
     @performance = Performance.find(params[:performance_id])
+
+    #Build a week of Distributeds - 14 shifts
+    @weekofdistributed = []
+    existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: 6)
+    thiseve = false
+    thisdate = @mystart
+    
+    (0..13).each do |i|
+      existingdist.each do |e|
+        if thisdate == e.curtain && thiseve == e.eve then
+          @weekofdistributed.push(e)
+        end
+      end
+      emptydist = Distributed.new(performance_id: params[:performance_id],
+        curtain: thisdate,
+        eve: thiseve,
+        product_id: 6,
+        language: 0,
+        isinfrared: true,
+        id: 0)
+
+      @weekofdistributed.push(emptydist) if @weekofdistributed.count == i
+
+      if thiseve == false then
+        thiseve = true
+      else
+        thiseve = false
+        thisdate = thisdate + 1.day
+      end
+    end
+
+    # weekofdistributed[i] = Distributed.new(performance_id: performanceid,
+    #    curtain: thisdate,
+    #    eve: thiseve,
+    #    product_id: productid,
+    #    language: thislang,
+    #    representative: distributedsearch.first.representative,
+    #    id: distributedsearch.first.id,
+    #    quantity: distributedsearch.first.quantity)
   end
 
 

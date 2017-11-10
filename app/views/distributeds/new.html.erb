@@ -25,27 +25,26 @@
   <div class="distbox shift0-00">Headsets</div>
   <div class="distbox shift0-00">Loops</div>
 
-  <%= fields_for @performance do |f| %>
-    <div class="distbox shift1-00">Mon 8/14</div>
-    <div class="distbox shift1-10">M</div>
-    <div class="distbox shift1-01">
-      <%= f.number_field :quantity, value:3, :tabIndex => 2000 %>
-    </div>
-    <div class="distbox shift1-02">
-      <%= f.number_field :quantity, value:1, :tabIndex => 2000 %>
-    </div>
-
-    <div class="distbox shift1-00">Mon 8/14</div>
-    <div class="distbox shift1-10">E</div>
-    <div class="distbox shift1-01">
-      <%= f.number_field :quantity, value:3, :tabIndex => 2000 %>
-    </div>
-    <div class="distbox shift1-02">
-      <%= f.number_field :quantity, value:1, :tabIndex => 2000 %>
-    </div>
+  <% @weekofdistributed.each_with_index do |dist, i| %>
+    <%= fields_for dist do |f| %>
+      <div class="distbox shift<%= i %>-00">
+        <%= dist.curtain.strftime('%a') %>
+        <%= dist.eve ? " Eve  " : " Mat  " %>
+        <%= dist.curtain.strftime('%-m-%-d') %>
+      </div>
+      <div class="distbox shift<%= i %>-10">
+        <%= dist.eve ? "E" : "M" %>
+      </div>
+      <div class="distbox shift<%= i %>-01">
+        <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
+      </div>
+      <div class="distbox shift<%= i %>-02">
+        <%= f.number_field :quantity, value: dist.id, :tabIndex => 2000 %>
+      </div>
+    <% end %>
   <% end %>
 
-  <div class="distbox shift3-00">Tue 8/15</div>
+  <!-- <div class="distbox shift3-00">Tue 8/15</div>
   <div class="distbox shift3-10">M</div>
   <div class="distbox shift3-01">&nbsp;</div>
   <div class="distbox shift3-02">&nbsp;</div>
@@ -103,7 +102,7 @@
   <div class="distbox shift6-00">Wed 8/16</div>
   <div class="distbox shift6-10">E</div>
   <div class="distbox shift6-01">&nbsp;</div>
-  <div class="distbox shift6-02">&nbsp;</div>
+  <div class="distbox shift6-02">&nbsp;</div> -->
 
 
 </div>

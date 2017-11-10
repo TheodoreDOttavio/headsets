@@ -54,7 +54,7 @@
 
 .distcontainer {
   display: grid;
-  grid-template-columns: 7em 1em repeat(2, [col] auto ) 50%;
+  grid-template-columns: 7em 1em repeat(2, [col] auto ) 70%;
   grid-template-areas:
     "interactive interactive header header ";
     "box box box box";
@@ -71,6 +71,18 @@
   grid-template-columns: repeat(5, [col] auto );
   grid-gap: 0em;
   background-color: #fff;
+  padding: 1em;
+}
+
+.distinfocontainer {
+  display: grid;
+  grid-template-columns: repeat(9, [col] auto );
+  grid-gap: 0em;
+  background-color: #fff;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ddd;
   padding: 1em;
 }
 
@@ -104,8 +116,8 @@
   border-style: solid;
   border-color: #000;
   color: #000;
-  padding: 2px;
   text-align: center;
+  vertical-align: middle;
   font-size: .75em;
 }
 
@@ -113,9 +125,17 @@
   background-color: #eee;
 }
 
+.distbox input {
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  width: 5em;
+  margin: 6px 0px 5px 0px;
+}
+
 .ssdistpaperwork {
 	grid-column: 11;
-	grid-row: 1 / 11;
+	grid-row: 1 / 20;
   background-color: #fff;
   color: #000;
   padding: 2px;

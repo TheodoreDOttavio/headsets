@@ -51,10 +51,6 @@ class UsersController < ApplicationController
                                  :txtupdate,
                                  :alert,
                                  :alerttime,
-                                 available_attributes: [:id,
-                                                        :day,
-                                                        :mat,
-                                                        :eve],
                                  performances_attributes: [:id,
                                                            :name])
   end

@@ -1,27 +1,49 @@
 <% provide(:title, 'Distributed Data Entry') %>
 
 <div class="distcontainer">
-  <div class="distpaperwork">Paper Work</div>
 
-  <div class="distheader">Show Name</div>
-  <div class="distinteractive">save cancel</div>
+  <div class="distpaperwork">
+    <%= image_tag findlog(@mystart, @performance.id, 1) %>
+  </div>
+
+  <div class="distheader">
+    <%= @performance.name %><br>
+    <%= @weekof %>
+  </div>
+  <div class="distinteractive">
+    <%= link_to '<', distributeds_path(params.merge(:mystart => @mystart)),
+      class: "btn btn-sm btn-danger" %>
+    <%= form_tag(:action => 'create', :method => 'post', :id => 1, :mystart => params[:mystart]) %>
+    <%= submit_tag 'Save', class: "btn btn-sm btn-primary" %>
+  </div>
+
   <!--shift00-00 [shift0-9]-[00-date/lang] -->
   <!--[0=label]-[0=date label] -->
-  <div class="distbox shift0-00">&nbsp;</div>
+  <div class="distinteractive shift0-00">&nbsp;</div>
   <div class="distbox shift0-10">&nbsp;</div>
   <div class="distbox shift0-10">&nbsp;</div>
   <div class="distbox shift0-00">Headsets</div>
   <div class="distbox shift0-00">Loops</div>
 
-  <div class="distbox shift1-00">Mon 8/14</div>
-  <div class="distbox shift1-10">M</div>
-  <div class="distbox shift1-01">&nbsp;</div>
-  <div class="distbox shift1-02">&nbsp;</div>
+  <%= fields_for @performance do |f| %>
+    <div class="distbox shift1-00">Mon 8/14</div>
+    <div class="distbox shift1-10">M</div>
+    <div class="distbox shift1-01">
+      <%= f.number_field :quantity, value:3, :tabIndex => 2000 %>
+    </div>
+    <div class="distbox shift1-02">
+      <%= f.number_field :quantity, value:1, :tabIndex => 2000 %>
+    </div>
 
-  <div class="distbox shift2-00">Mon 8/14</div>
-  <div class="distbox shift2-10">E</div>
-  <div class="distbox shift2-01">&nbsp;</div>
-  <div class="distbox shift2-02">&nbsp;</div>
+    <div class="distbox shift1-00">Mon 8/14</div>
+    <div class="distbox shift1-10">E</div>
+    <div class="distbox shift1-01">
+      <%= f.number_field :quantity, value:3, :tabIndex => 2000 %>
+    </div>
+    <div class="distbox shift1-02">
+      <%= f.number_field :quantity, value:1, :tabIndex => 2000 %>
+    </div>
+  <% end %>
 
   <div class="distbox shift3-00">Tue 8/15</div>
   <div class="distbox shift3-10">M</div>
@@ -83,12 +105,15 @@
   <div class="distbox shift6-01">&nbsp;</div>
   <div class="distbox shift6-02">&nbsp;</div>
 
+
 </div>
 
 <hr>
 
 <div class="ssdistcontainer">
-  <div class="ssdistpaperwork">Paper Work</div>
+  <div class="ssdistpaperwork">
+    <%= image_tag findlog(@mystart, @performance.id, 2) %>
+  </div>
 
   <div class="ssdistheader">Show Name</div>
   <div class="distinteractive">save cancel</div>

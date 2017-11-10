@@ -3,8 +3,7 @@ Rails.application.routes.draw do
             :theaters,
             :performances,
             :products,
-            :distributeds # ,
-  # :availables,
+            :distributeds
 
   match '/getautopass', to: 'users#getautopassword', via: 'get'
 

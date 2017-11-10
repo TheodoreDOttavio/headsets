@@ -18,24 +18,21 @@
   <% end %>
 </div>
 
-<div class="distpickcontainer">
-  <div class="distpickbox">Select Week</div>
-  <div class="distpickbox"><%= link_to "Blue is Complete", distributeds_path, class: "btn btn-sm btn-primary" %></div>
-  <div class="distpickbox"><%= link_to "Yellow is Partial", distributeds_path, class: "btn btn-sm btn-warning" %></div>
-  <div class="distpickbox"><%= link_to "Red is Empty", distributeds_path, class: "btn btn-sm btn-danger" %></div>
-</div>
-
-<div class="distpickcontainer">
-  <div class="distpickbox"><%= link_to '2 months', distributeds_path(params.merge(:myweekslist => 8)),
+<div class="distinfocontainer">
+  <div class="distpickbox"><%= link_to '2 mo', distributeds_path(params.merge(:myweekslist => 8)),
     class: "btn btn-sm btn-primary" %></div>
-  <div class="distpickbox"><%= link_to '6 months', distributeds_path(params.merge(:myweekslist => 24)),
+  <div class="distpickbox"><%= link_to '6 mo', distributeds_path(params.merge(:myweekslist => 24)),
     class: "btn btn-sm btn-primary" %></div>
-  <div class="distpickbox"><%= link_to '1 year', distributeds_path(params.merge(:myweekslist => 52)),
+  <div class="distpickbox"><%= link_to '1 yr', distributeds_path(params.merge(:myweekslist => 52)),
     class: "btn btn-sm btn-primary" %></div>
-  <div class="distpickbox"><%= link_to '3 years', distributeds_path(params.merge(:myweekslist => 156)),
+  <div class="distpickbox"><%= link_to '3 yrs', distributeds_path(params.merge(:myweekslist => 156)),
     class: "btn btn-sm btn-primary" %></div>
-  <div class="distpickbox"><%= link_to '5 years', distributeds_path(params.merge(:myweekslist => 260)),
+  <div class="distpickbox"><%= link_to '5 yrs', distributeds_path(params.merge(:myweekslist => 260)),
     class: "btn btn-sm btn-primary" %></div>
+  <div class="distpickbox">&nbsp;</div>
+  <div class="distpickbox"><%= link_to "Empty", distributeds_path, class: "btn btn-sm btn-danger" %></div>
+  <div class="distpickbox"><%= link_to "Partial", distributeds_path, class: "btn btn-sm btn-warning" %></div>
+  <div class="distpickbox"><%= link_to "Complete", distributeds_path, class: "btn btn-sm btn-primary" %></div>
 </div>
 
 <div class="distpickcontainer">

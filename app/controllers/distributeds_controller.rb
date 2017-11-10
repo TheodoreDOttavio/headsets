@@ -3,15 +3,15 @@ class DistributedsController < ApplicationController
     administratorsOnly
 
     @mystart = if params[:mystart]
-                 params[:mystart].to_date
-               else
-                 weekstart
-               end
+      params[:mystart].to_date
+    else
+      weekstart
+    end
 
     @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6).strftime('%b %d, %Y')
 
-    performances = Performance.showinglist(@mystart)
     @showstoedit = []
+    performances = Performance.showinglist(@mystart)
     performances.each do |p|
       mycount = Distributed.datespan(@mystart, (@mystart+7)).where('performance_id = ?', p.id).count
       if mycount != 0 then
@@ -31,15 +31,14 @@ class DistributedsController < ApplicationController
      weekslist = 8
     end
 
-
     for i in 1..weekslist do
       mystart = weekstart - (i * 7)
 
       #add in some info about what has been entered
       myshowcount = Performance.showingcount(mystart, (mystart+6))
       myinfraredcount = Distributed.infraredwkcount(mystart)
-      myscanscount = Scan.scanscount(mystart)
-      myssscanscount = Scan.ssscanscount(mystart)
+      # myscanscount = Scan.scanscount(mystart)
+      # myssscanscount = Scan.ssscanscount(mystart)
 
       if myinfraredcount == 0 then #&& myspecialservicescount == 0 then
         mybuttonclass = "btn btn-sm btn-danger"
@@ -53,27 +52,41 @@ class DistributedsController < ApplicationController
 
       @weektoedit.push({"showweekof" => mystart.strftime('%b %d')+" to "+ (mystart+7).strftime('%b %d, %Y'),
         "startdate" => mystart,
-        "showcount" => myshowcount,
         "infraredcount" => myinfraredcount,
-        "scanscount" => myscanscount.to_s + " - " + myssscanscount.to_s,
         "buttonclass" => mybuttonclass})
     end
   end
 
+
   def show
   end
 
+
   def new
+    @mystart = if params[:mystart]
+      params[:mystart].to_date
+    else
+      weekstart
+    end
+
+    @weekof = @mystart.strftime('%b %d')+" to "+ (@mystart+6).strftime('%b %d, %Y')
+
+    #Get the Show
+    @performance = Performance.find(params[:performance_id])
   end
+
 
   def create
   end
 
+
   def edit
   end
 
+
   def update
   end
+
 
   def destroy
   end

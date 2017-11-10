@@ -147,10 +147,6 @@
   font-size: 1em;
 }
 
-.distbox:nth-child(even) {
-  background-color: #eee;
-}
-
 .distbox input {
   border-style: none;
   background-color: rgba(255, 255, 255, 0);
@@ -160,21 +156,21 @@
 }
 
 .shiftlabel { grid-row: 2; }
-.shift0 { grid-row: 3; }
+.shift0 { grid-row: 3; background-color: #eee; }
 .shift1 { grid-row: 4; }
-.shift2 { grid-row: 5; }
+.shift2 { grid-row: 5; background-color: #eee; }
 .shift3 { grid-row: 6; }
-.shift4 { grid-row: 7; }
+.shift4 { grid-row: 7; background-color: #eee; }
 .shift5 { grid-row: 8; }
-.shift6 { grid-row: 9; }
+.shift6 { grid-row: 9; background-color: #eee; }
 .shift7 { grid-row: 10; }
-.shift8 { grid-row: 11; }
+.shift8 { grid-row: 11; background-color: #eee; }
 .shift9 { grid-row: 12; }
-.shift10 { grid-row: 13; }
+.shift10 { grid-row: 13; background-color: #eee; }
 .shift11 { grid-row: 14; }
-.shift12 { grid-row: 15; }
+.shift12 { grid-row: 15; background-color: #eee; }
 .shift13 { grid-row: 16; }
-.shift14 { grid-row: 17; }
+.shift14 { grid-row: 17; background-color: #eee; }
 .prodlabel { grid-column: 1; }
 .prod1 { grid-column: 2; }
 .prod2 { grid-column: 3; }

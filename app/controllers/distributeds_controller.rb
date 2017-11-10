@@ -75,26 +75,37 @@ class DistributedsController < ApplicationController
     @performance = Performance.find(params[:performance_id])
 
     #Build a week of Distributeds - 14 shifts
-    @weekofdistributed = []
+    @weekofdistributed = {}
     existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: [6..7])
     thiseve = false
     thisdate = @mystart
 
-    (0..13).each do |i|
-      existingdist.each do |e|
-        if thisdate == e.curtain && thiseve == e.eve then
-          @weekofdistributed.push(e)
+    (0..13).each do |shift|
+      label = thisdate.strftime('%a')
+      thiseve ? label += " Eve  " : label += " Mat  "
+      label += thisdate.strftime('%-m-%-d')
+
+      @weekofdistributed["label_#{shift}"] = label
+      @weekofdistributed["data_#{shift}"] = []
+      (6..7).each do |product|
+        foundone = false
+        existingdist.each do |e|
+          if thisdate == e.curtain && thiseve == e.eve && product == e.product_id then
+            @weekofdistributed["data_#{shift}"].push(e)
+            foundone = true
+          end
+        end
+        if foundone == false then
+          emptydist = Distributed.new(performance_id: params[:performance_id],
+            curtain: thisdate,
+            eve: thiseve,
+            product_id: product,
+            language: 0,
+            isinfrared: true,
+            id: 0)
+          @weekofdistributed["data_#{shift}"].push(emptydist)
         end
       end
-      emptydist = Distributed.new(performance_id: params[:performance_id],
-        curtain: thisdate,
-        eve: thiseve,
-        product_id: 6,
-        language: 0,
-        isinfrared: true,
-        id: 0)
-
-      @weekofdistributed.push(emptydist) if @weekofdistributed.count == i
 
       if thiseve == false then
         thiseve = true

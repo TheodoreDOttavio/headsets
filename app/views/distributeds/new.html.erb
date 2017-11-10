@@ -5,7 +5,6 @@
   <div class="distpaperwork">
     <%= image_tag findlog(@mystart, @performance.id, 1) %>
   </div>
-
   <div class="distheader">
     <%= @performance.name %><br>
     <%= @weekof %>
@@ -19,14 +18,13 @@
   <div class="distbox shiftlabel prod1">Headsets</div>
   <div class="distbox shiftlabel prod2">Loops</div>
 
-  <% @weekofdistributed.each_with_index do |dist, i| %>
-    <%= fields_for dist do |f| %>
-      <div class="distbox shift<%= i %> prodlabel">
-        <%= dist.curtain.strftime('%a') %>
-        <%= dist.eve ? " Eve  " : " Mat  " %>
-        <%= dist.curtain.strftime('%-m-%-d') %>
-      </div>
-      <div class="distbox shift<%= i %> <%= (dist.product_id == 6) ? "prod1" : "prod2" %>" >
+  <% (0..13).each do |shift| %>
+    <div class="distbox shift<%= shift %> prodlabel">
+      <%= @weekofdistributed["label_#{shift}"] %>
+    </div>
+    <% @weekofdistributed["data_#{shift}"].each do |dist| %>
+      <%= fields_for dist do |f| %>
+      <div class="distbox shift<%= shift %> <%= (dist.product_id == 6) ? "prod1" : "prod2" %>" >
           <%= f.hidden_field :id, value:dist.id %>
           <%= f.hidden_field :curtain, value:dist.curtain %>
           <%= f.hidden_field :eve, value:dist.eve %>
@@ -36,18 +34,7 @@
 
           <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
       </div>
-      <!-- <div class="distbox shift<%= i %> prod2">
-        <% if dist.product_id == 7 then %>
-          <%= f.hidden_field :id, value:dist.id %>
-          <%= f.hidden_field :curtain, value:dist.curtain %>
-          <%= f.hidden_field :eve, value:dist.eve %>
-          <%= f.hidden_field :performance_id, value:dist.performance_id %>
-          <%= f.hidden_field :product_id, value:dist.product_id %>
-          <%= f.hidden_field :language, value:dist.language %>
-
-          <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
-        <% end %>
-      </div> -->
+      <% end %>
     <% end %>
   <% end %>
 

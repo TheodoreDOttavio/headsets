@@ -66,6 +66,14 @@
   padding: .25em;
 }
 
+.distpickcontainer {
+  display: grid;
+  grid-template-columns: repeat(5, [col] auto );
+  grid-gap: 0em;
+  background-color: #fff;
+  padding: 1em;
+}
+
 .ssdistheader {
   grid-column: 2 / 10;
 	grid-row: 1;
@@ -122,5 +130,14 @@
   color: #000;
   padding: 2px;
   text-align: center;
+  font-size: 1em;
+}
+
+
+.distpickbox {
+  background-color: #fff;
+  color: #000;
+  padding: .25em;
+  text-align: left;
   font-size: 1em;
 }

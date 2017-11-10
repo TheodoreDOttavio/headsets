@@ -16,94 +16,40 @@
     <%= form_tag(:action => 'create', :method => 'post', :id => 1, :mystart => params[:mystart]) %>
     <%= submit_tag 'Save', class: "btn btn-sm btn-primary" %>
   </div>
-
-  <!--shift00-00 [shift0-9]-[00-date/lang] -->
-  <!--[0=label]-[0=date label] -->
-  <div class="distinteractive shift0-00">&nbsp;</div>
-  <div class="distbox shift0-10">&nbsp;</div>
-  <div class="distbox shift0-10">&nbsp;</div>
-  <div class="distbox shift0-00">Headsets</div>
-  <div class="distbox shift0-00">Loops</div>
+  <div class="distbox shiftlabel prod1">Headsets</div>
+  <div class="distbox shiftlabel prod2">Loops</div>
 
   <% @weekofdistributed.each_with_index do |dist, i| %>
     <%= fields_for dist do |f| %>
-      <div class="distbox shift<%= i %>-00">
+      <div class="distbox shift<%= i %> prodlabel">
         <%= dist.curtain.strftime('%a') %>
         <%= dist.eve ? " Eve  " : " Mat  " %>
         <%= dist.curtain.strftime('%-m-%-d') %>
       </div>
-      <div class="distbox shift<%= i %>-10">
-        <%= dist.eve ? "E" : "M" %>
+      <div class="distbox shift<%= i %> <%= (dist.product_id == 6) ? "prod1" : "prod2" %>" >
+          <%= f.hidden_field :id, value:dist.id %>
+          <%= f.hidden_field :curtain, value:dist.curtain %>
+          <%= f.hidden_field :eve, value:dist.eve %>
+          <%= f.hidden_field :performance_id, value:dist.performance_id %>
+          <%= f.hidden_field :product_id, value:dist.product_id %>
+          <%= f.hidden_field :language, value:dist.language %>
+
+          <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
       </div>
-      <div class="distbox shift<%= i %>-01">
-        <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
-      </div>
-      <div class="distbox shift<%= i %>-02">
-        <%= f.number_field :quantity, value: dist.id, :tabIndex => 2000 %>
-      </div>
+      <!-- <div class="distbox shift<%= i %> prod2">
+        <% if dist.product_id == 7 then %>
+          <%= f.hidden_field :id, value:dist.id %>
+          <%= f.hidden_field :curtain, value:dist.curtain %>
+          <%= f.hidden_field :eve, value:dist.eve %>
+          <%= f.hidden_field :performance_id, value:dist.performance_id %>
+          <%= f.hidden_field :product_id, value:dist.product_id %>
+          <%= f.hidden_field :language, value:dist.language %>
+
+          <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 2000 %>
+        <% end %>
+      </div> -->
     <% end %>
   <% end %>
-
-  <!-- <div class="distbox shift3-00">Tue 8/15</div>
-  <div class="distbox shift3-10">M</div>
-  <div class="distbox shift3-01">&nbsp;</div>
-  <div class="distbox shift3-02">&nbsp;</div>
-
-  <div class="distbox shift4-00">Tue 8/15</div>
-  <div class="distbox shift4-10">M</div>
-  <div class="distbox shift4-01">&nbsp;</div>
-  <div class="distbox shift4-02">&nbsp;</div>
-
-  <div class="distbox shift5-00">Wed 8/16</div>
-  <div class="distbox shift5-10">M</div>
-  <div class="distbox shift5-01">&nbsp;</div>
-  <div class="distbox shift5-02">&nbsp;</div>
-
-  <div class="distbox shift6-00">Wed 8/16</div>
-  <div class="distbox shift6-10">E</div>
-  <div class="distbox shift6-01">&nbsp;</div>
-  <div class="distbox shift6-02">&nbsp;</div>
-
-  <div class="distbox shift7-00">Thu 8/17</div>
-  <div class="distbox shift7-10">M</div>
-  <div class="distbox shift7-01">&nbsp;</div>
-  <div class="distbox shift7-02">&nbsp;</div>
-
-  <div class="distbox shift8-00">Thu 8/17</div>
-  <div class="distbox shift8-10">M</div>
-  <div class="distbox shift8-01">&nbsp;</div>
-  <div class="distbox shift8-02">&nbsp;</div>
-
-  <div class="distbox shift9-00">Fri 8/14</div>
-  <div class="distbox shift9-10">M</div>
-  <div class="distbox shift9-01">&nbsp;</div>
-  <div class="distbox shift9-02">&nbsp;</div>
-
-  <div class="distbox shift10-00">Fri 8/14</div>
-  <div class="distbox shift10-10">E</div>
-  <div class="distbox shift10-01">&nbsp;</div>
-  <div class="distbox shift10-02">&nbsp;</div>
-
-  <div class="distbox shift3-00">Tue 8/15</div>
-  <div class="distbox shift3-10">M</div>
-  <div class="distbox shift3-01">&nbsp;</div>
-  <div class="distbox shift3-02">&nbsp;</div>
-
-  <div class="distbox shift4-00">Tue 8/15</div>
-  <div class="distbox shift4-10">M</div>
-  <div class="distbox shift4-01">&nbsp;</div>
-  <div class="distbox shift4-02">&nbsp;</div>
-
-  <div class="distbox shift5-00">Wed 8/16</div>
-  <div class="distbox shift5-10">M</div>
-  <div class="distbox shift5-01">&nbsp;</div>
-  <div class="distbox shift5-02">&nbsp;</div>
-
-  <div class="distbox shift6-00">Wed 8/16</div>
-  <div class="distbox shift6-10">E</div>
-  <div class="distbox shift6-01">&nbsp;</div>
-  <div class="distbox shift6-02">&nbsp;</div> -->
-
 
 </div>
 

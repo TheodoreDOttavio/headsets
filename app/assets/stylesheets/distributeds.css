@@ -54,10 +54,7 @@
 
 .distcontainer {
   display: grid;
-  grid-template-columns: 7em 1em repeat(2, [col] auto ) 70%;
-  grid-template-areas:
-    "interactive interactive header header ";
-    "box box box box";
+  grid-template-columns: 7em repeat(2, [col] auto ) 70%;
   grid-gap: 0em;
   background-color: #fff;
   border-width: 1px;
@@ -95,19 +92,40 @@
 }
 
 .distheader {
-  grid-column: 1 / 4;
+  grid-column: 2 / 4;
 	grid-row: 1;
-  grid-area: header;
   text-align: center;
   font-size: 1em;
 }
 
 .distinteractive {
+  grid-column: 1;
+  grid-row: 1;
   background-color: #ddd;
   color: #000;
   padding: 2px;
   text-align: center;
   font-size: .75em;
+}
+
+.ssdistpaperwork {
+  grid-column: 11;
+  grid-row: 1 / 20;
+  background-color: #fff;
+  color: #000;
+  padding: 2px;
+  text-align: center;
+  font-size: 1em;
+}
+
+.distpaperwork {
+  grid-column: 4;
+  grid-row: 1 / 20;
+  background-color: #fff;
+  color: #000;
+  padding: 2px;
+  text-align: center;
+  font-size: 1em;
 }
 
 .distbox {
@@ -119,6 +137,14 @@
   text-align: center;
   vertical-align: middle;
   font-size: .75em;
+}
+
+.distpickbox {
+  background-color: #fff;
+  color: #000;
+  padding: .25em;
+  text-align: left;
+  font-size: 1em;
 }
 
 .distbox:nth-child(even) {
@@ -133,31 +159,22 @@
   margin: 6px 0px 5px 0px;
 }
 
-.ssdistpaperwork {
-	grid-column: 11;
-	grid-row: 1 / 20;
-  background-color: #fff;
-  color: #000;
-  padding: 2px;
-  text-align: center;
-  font-size: 1em;
-}
-
-.distpaperwork {
-	grid-column: 5;
-	grid-row: 1 / 20;
-  background-color: #fff;
-  color: #000;
-  padding: 2px;
-  text-align: center;
-  font-size: 1em;
-}
-
-
-.distpickbox {
-  background-color: #fff;
-  color: #000;
-  padding: .25em;
-  text-align: left;
-  font-size: 1em;
-}
+.shiftlabel { grid-row: 2; }
+.shift0 { grid-row: 3; }
+.shift1 { grid-row: 4; }
+.shift2 { grid-row: 5; }
+.shift3 { grid-row: 6; }
+.shift4 { grid-row: 7; }
+.shift5 { grid-row: 8; }
+.shift6 { grid-row: 9; }
+.shift7 { grid-row: 10; }
+.shift8 { grid-row: 11; }
+.shift9 { grid-row: 12; }
+.shift10 { grid-row: 13; }
+.shift11 { grid-row: 14; }
+.shift12 { grid-row: 15; }
+.shift13 { grid-row: 16; }
+.shift14 { grid-row: 17; }
+.prodlabel { grid-column: 1; }
+.prod1 { grid-column: 2; }
+.prod2 { grid-column: 3; }

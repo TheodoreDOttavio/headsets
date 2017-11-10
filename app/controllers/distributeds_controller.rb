@@ -76,10 +76,10 @@ class DistributedsController < ApplicationController
 
     #Build a week of Distributeds - 14 shifts
     @weekofdistributed = []
-    existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: 6)
+    existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: [6..7])
     thiseve = false
     thisdate = @mystart
-    
+
     (0..13).each do |i|
       existingdist.each do |e|
         if thisdate == e.curtain && thiseve == e.eve then

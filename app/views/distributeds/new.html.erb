@@ -22,8 +22,8 @@
     <div class="distbox shift<%= shift %> prodlabel">
       <%= @weekofdistributed["label_#{shift}"] %>
     </div>
-    <% @weekofdistributed["data_#{shift}"].each do |dist| %>
-      <%= fields_for dist do |f| %>
+    <% @weekofdistributed["data_#{shift}"].each_with_index do |dist, x| %>
+      <%= fields_for "dist_#{((shift+1)*10) + (x+1)}" do |f| %>
       <div class="distbox shift<%= shift %> <%= (dist.product_id == 6) ? "prod1" : "prod2" %>" >
         <%= f.hidden_field :id, value:dist.id %>
         <%= f.hidden_field :curtain, value:dist.curtain %>

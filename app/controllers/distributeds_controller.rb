@@ -164,8 +164,21 @@ class DistributedsController < ApplicationController
 
 
   def create
-    puts " _____________"
-    puts params
+    puts "Trial by fire _____________"
+    params.each do |key, value|
+      if key[0..3] == "dist" then
+        if params[key][:quantity] != 0 then
+          if params[key][:id] == 0 then
+            puts "new " + params[key][:quantity].to_s
+            params[key].save
+          else
+            puts "upadate " + params[key][:quantity].to_s
+            params[key].update
+          end
+        end
+
+      end
+    end
     puts " _____________"
     redirect_to distributeds_path
 

@@ -115,10 +115,10 @@ class DistributedsController < ApplicationController
       end
     end
 
-    languages = Shortlists.new.languages
-    languages.delete(:Infrared)
+    @languages = Shortlists.new.languages
+    @languages.delete(:Infrared)
     @weekofssdistributed = {}
-    existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: [6..7])
+    existingdist = Distributed.datespan(@mystart, @mystart+7).where(performance_id: params[:performance_id], product_id: [4..5])
     thiseve = false
     thisdate = @mystart
 
@@ -129,12 +129,12 @@ class DistributedsController < ApplicationController
 
       @weekofssdistributed["label_#{shift}"] = label
       @weekofssdistributed["data_#{shift}"] = []
-      languages.each do |key, language|
+      @languages.each do |key, language|
         product = 4
         product = 5 if language == 1
         foundone = false
         existingdist.each do |e|
-          if thisdate == e.curtain && thiseve == e.eve && product == e.product_id then
+          if thisdate == e.curtain && thiseve == e.eve && language == e.language then
             @weekofssdistributed["data_#{shift}"].push(e)
             foundone = true
           end

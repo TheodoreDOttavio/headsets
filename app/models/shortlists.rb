@@ -5,7 +5,7 @@ class Shortlists
 
   def initialize
     super
-    languages = { Infrared: 0, iCaption: 1, dScript: 2, Chinese: 3, French: 4, German: 5, Japanese: 6, Portugese: 7, Spanish: 8, Turkish: 9, Korean: 10 }
+    languages = { Infrared: 0, iCaption: 1, dScript: 2, Chinese: 3, French: 4, German: 5, Turkish: 9, Korean: 10, Japanese: 6, Portugese: 7, Spanish: 8 }
     @languages ||= languages
 
     companies = []

@@ -164,6 +164,13 @@ class DistributedsController < ApplicationController
 
 
   def create
+    puts " _____________"
+    puts params
+    puts " _____________"
+    redirect_to distributeds_path
+
+    # {"utf8"=>"✓", "authenticity_token"=>"VhcUH8LXHZzjcDyo0j64feRDlUqIyeXpO86OJZ06Obbm7SThO31K6/mltVC2h2mwuqyUJ1hJO03f0+itAnLdpg==", "commit"=>"Save", "distributed"=>{"id"=>"0", "curtain"=>"2017-03-12 00:00:00 UTC", "eve"=>"true", "performance_id"=>"75", "product_id"=>"4", "language"=>"8", "quantity"=>""}, "id"=>"1", "method"=>"post", "mystart"=>"2017-03-06T00:00:00+00:00", "controller"=>"distributeds", "action"=>"create"}
+
   end
 
 

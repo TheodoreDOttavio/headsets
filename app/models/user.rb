@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :availables
-  accepts_nested_attributes_for :availables
-
   # this is a test for memmory objects, not database entries so a double submit will still create two entries that are the same
   #  need to implement at the database level as well
 

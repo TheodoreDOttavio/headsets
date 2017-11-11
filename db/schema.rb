@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911113700) do
-
-  create_table "availables", force: :cascade do |t|
-    t.integer  "user_id",    default: 1
-    t.datetime "day",                        null: false
-    t.boolean  "eve",        default: true
-    t.boolean  "free",       default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "availables", ["user_id"], name: "index_availables_on_user_id"
+ActiveRecord::Schema.define(version: 20171110005512) do
 
   create_table "cabinets", force: :cascade do |t|
     t.integer  "performance_id", null: false

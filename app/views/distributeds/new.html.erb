@@ -1,98 +1,166 @@
 <% provide(:title, 'Distributed Data Entry') %>
-<div align="center">
-<div class="well well-sm">
-<h1><%= @performance.name %> for <%= @weekof %></h1>
 
-<%= render 'static_pages/error_messages', :currentmodel => @distributed %>
+<div class="distcontainer">
 
-<div class="row">
-    <div class="col-sm-6 editbold ct" style="position: relative;
-    top: 0px;
-    bottom: 0;
-    left: 0;
-    height: 800px;
-    overflow-y: scroll;">
+  <div class="distpaperwork">
     <%= image_tag findlog(@mystart, @performance.id, 1) %>
+  </div>
+  <div class="distheader">
+    <%= @performance.name %><br>
+    <%= @weekof %>
+  </div>
+  <div class="distinteractive">
+    <%= link_to '<', distributeds_path(params.merge(:mystart => @mystart)),
+      class: "btn btn-sm btn-danger" %>
+    <%= form_tag(:action => 'create', :method => 'post', :id => 1, :mystart => params[:mystart]) %>
+    <%= submit_tag 'Save', class: "btn btn-sm btn-primary" %>
+  </div>
+  <div class="distbox shiftlabel prod1">Headsets</div>
+  <div class="distbox shiftlabel prod2">Loops</div>
+
+  <% (0..13).each do |shift| %>
+    <div class="distbox shift<%= shift %> prodlabel">
+      <%= @weekofdistributed["label_#{shift}"] %>
+    </div>
+    <% @weekofdistributed["data_#{shift}"].each do |dist| %>
+      <%= fields_for dist do |f| %>
+      <div class="distbox shift<%= shift %> <%= (dist.product_id == 6) ? "prod1" : "prod2" %>" >
+        <%= f.hidden_field :id, value:dist.id %>
+        <%= f.hidden_field :curtain, value:dist.curtain %>
+        <%= f.hidden_field :eve, value:dist.eve %>
+        <%= f.hidden_field :performance_id, value:dist.performance_id %>
+        <%= f.hidden_field :product_id, value:dist.product_id %>
+        <%= f.hidden_field :language, value:dist.language %>
+
+        <%= f.number_field :quantity, value: dist.quantity, :tabIndex => 1000 %>
+      </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<hr>
+
+<div class="ssdistcontainer">
+  <div class="ssdistpaperwork">
     <%= image_tag findlog(@mystart, @performance.id, 2) %>
   </div>
-  <div class="col-sm-6 editbold ct" style="position: relative;
-    top: 0px;
-    bottom: 0;
-    left: 0;
-    height: 800px;
-    overflow-y: scroll;">
 
-<%= link_to "Cancel", distributeds_path(mystart: @mystart),
-  class: "btn btn-sm btn-warning" %>
-<%= link_to "Voice Entry", ventry_path,
-  class: "btn btn-sm btn-primary" %>
+  <div class="ssdistheader">
+    <%= @performance.name %><br>
+    <%= @weekof %>
+  </div>
+  <div class="distinteractive">save cancel</div>
+  <!--shift00-00 [shift0-9]-[00-date/lang] -->
+  <!--[0=label]-[0=date label] -->
+  <div class="distbox shift0-00">&nbsp;</div>
+  <div class="distbox shift0-00">Frn</div>
+  <div class="distbox shift0-00">Ger</div>
+  <div class="distbox shift0-00">Jap</div>
+  <div class="distbox shift0-00">Man</div>
+  <div class="distbox shift0-00">Kor</div>
+  <div class="distbox shift0-00">Por</div>
+  <div class="distbox shift0-00">Spn</div>
+  <div class="distbox shift0-00">iCap</div>
+  <div class="distbox shift0-00">desc</div>
 
-<%= form_tag(:action => 'create', :method => 'post', :id => 1, :mystart => params[:mystart]) %>
-<%= submit_tag 'Save Changes', class: "btn btn-sm btn-primary" %>
+  <div class="distbox shift1-00">Tue 8/14 E</div>
+  <div class="distbox shift1-01">&nbsp;</div>
+  <div class="distbox shift1-02">&nbsp;</div>
+  <div class="distbox shift1-03">&nbsp;</div>
+  <div class="distbox shift1-04">&nbsp;</div>
+  <div class="distbox shift1-05">&nbsp;</div>
+  <div class="distbox shift1-06">&nbsp;</div>
+  <div class="distbox shift1-07">&nbsp;</div>
+  <div class="distbox shift1-08">&nbsp;</div>
+  <div class="distbox shift1-09">&nbsp;</div>
 
-  <% @weekofdistributed.each_with_index do |distributed, i| %>
+  <div class="distbox shift2-00">Wed 8/15 M</div>
+  <div class="distbox shift2-01">&nbsp;</div>
+  <div class="distbox shift2-02">&nbsp;</div>
+  <div class="distbox shift2-03">&nbsp;</div>
+  <div class="distbox shift2-04">&nbsp;</div>
+  <div class="distbox shift2-05">&nbsp;</div>
+  <div class="distbox shift2-06">&nbsp;</div>
+  <div class="distbox shift2-07">&nbsp;</div>
+  <div class="distbox shift2-08">&nbsp;</div>
+  <div class="distbox shift2-09">&nbsp;</div>
 
-    <%= fields_for "distributed#{i}" do |f| %>
+  <div class="distbox shift3-00">Wed 8/15 E</div>
+  <div class="distbox shift3-01">&nbsp;</div>
+  <div class="distbox shift3-02">&nbsp;</div>
+  <div class="distbox shift3-03">&nbsp;</div>
+  <div class="distbox shift3-04">&nbsp;</div>
+  <div class="distbox shift3-05">&nbsp;</div>
+  <div class="distbox shift3-06">&nbsp;</div>
+  <div class="distbox shift3-07">&nbsp;</div>
+  <div class="distbox shift3-08">&nbsp;</div>
+  <div class="distbox shift3-09">&nbsp;</div>
 
-    <% if distributed.curtain.strftime('%a') == 'Mon' %>
-      <% if distributed.eve == false %>
-        <% if distributed.language == 0 %>
-          <div class="row">
-            <div class="col-sm-12 editbold ct">
-              <%= Product.find(distributed.product_id).name %>
-              <% if distributed.product_id == 1 or 6 %>
-                <div class="row">
-                    <div class="col-sm-6 editbold ct">Assign rep to all unknown/TBD with a quantity</div>
-                    <div class="col-sm-6 editlight ct"><%= f.select :weekofrepresentative, options_for_select(@representatives, distributed.representative) %></div>
-                  </div>
-                <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
+  <div class="distbox shift4-00">Thur 8/16 E</div>
+  <div class="distbox shift4-01">&nbsp;</div>
+  <div class="distbox shift4-02">&nbsp;</div>
+  <div class="distbox shift4-03">&nbsp;</div>
+  <div class="distbox shift4-04">&nbsp;</div>
+  <div class="distbox shift4-05">&nbsp;</div>
+  <div class="distbox shift4-06">&nbsp;</div>
+  <div class="distbox shift4-07">&nbsp;</div>
+  <div class="distbox shift4-08">&nbsp;</div>
+  <div class="distbox shift4-09">&nbsp;</div>
 
-<div class="row">
-      <div class="col-sm-4 editbold rt">
-      <% if distributed.language.to_i == 0 then %>
-        <% if distributed.eve == true then %>
-          <%= distributed.curtain.strftime('%a E (%m / %d)') %>
-        <% else %>
-          <%= distributed.curtain.strftime('%a M (%m / %d)') %>
-        <% end %>
-      <% end %>
-      </div>
+  <div class="distbox shift5-00">Fri 8/17 E</div>
+  <div class="distbox shift5-01">&nbsp;</div>
+  <div class="distbox shift5-02">&nbsp;</div>
+  <div class="distbox shift5-03">&nbsp;</div>
+  <div class="distbox shift5-04">&nbsp;</div>
+  <div class="distbox shift5-05">&nbsp;</div>
+  <div class="distbox shift5-06">&nbsp;</div>
+  <div class="distbox shift5-07">&nbsp;</div>
+  <div class="distbox shift5-08">&nbsp;</div>
+  <div class="distbox shift5-09">&nbsp;</div>
 
-      <%= f.hidden_field :id, value:distributed.id %>
-      <%= f.hidden_field :curtain, value:distributed.curtain %>
-      <%= f.hidden_field :eve, value:distributed.eve %>
-      <%= f.hidden_field :performance_id, value:@performance.id %>
-      <%= f.hidden_field :product_id, value:distributed.product_id %>
-      <%= f.hidden_field :language, value:distributed.language %>
+  <div class="distbox shift6-00">Sat 8/18 M</div>
+  <div class="distbox shift6-01">&nbsp;</div>
+  <div class="distbox shift6-02">&nbsp;</div>
+  <div class="distbox shift6-03">&nbsp;</div>
+  <div class="distbox shift6-04">&nbsp;</div>
+  <div class="distbox shift6-05">&nbsp;</div>
+  <div class="distbox shift6-06">&nbsp;</div>
+  <div class="distbox shift6-07">&nbsp;</div>
+  <div class="distbox shift6-08">&nbsp;</div>
+  <div class="distbox shift6-09">&nbsp;</div>
 
-      <% if distributed.language.to_i > 0 then %>
-          <div class="col-sm-4 editbold lt">
-          <%= @language.key(distributed.language.to_i) %>
-          </div>
-      <% end %>
+  <div class="distbox shift7-00">Sat 8/18 E</div>
+  <div class="distbox shift7-01">&nbsp;</div>
+  <div class="distbox shift7-02">&nbsp;</div>
+  <div class="distbox shift7-03">&nbsp;</div>
+  <div class="distbox shift7-04">&nbsp;</div>
+  <div class="distbox shift7-05">&nbsp;</div>
+  <div class="distbox shift7-06">&nbsp;</div>
+  <div class="distbox shift7-07">&nbsp;</div>
+  <div class="distbox shift7-08">&nbsp;</div>
+  <div class="distbox shift7-09">&nbsp;</div>
 
-      <div class="col-sm-2 editbold lt tight">
-        <%= f.number_field :quantity, value:distributed.quantity, :tabIndex => 2000 %>
-      </div>
+  <div class="distbox shift8-00">Sun 8/19 M</div>
+  <div class="distbox shift8-01">&nbsp;</div>
+  <div class="distbox shift8-02">&nbsp;</div>
+  <div class="distbox shift8-03">&nbsp;</div>
+  <div class="distbox shift8-04">&nbsp;</div>
+  <div class="distbox shift8-05">&nbsp;</div>
+  <div class="distbox shift8-06">&nbsp;</div>
+  <div class="distbox shift8-07">&nbsp;</div>
+  <div class="distbox shift8-08">&nbsp;</div>
+  <div class="distbox shift8-09">&nbsp;</div>
 
-      <% if distributed.product_id == 1 or distributed.product_id == 6 then %>
-        <div class="col-sm-3 editlight ct tight">
-          <%= f.select :representative, options_for_select(@representatives, distributed.representative) %>
-        </div>
-      <% else %>
-        <%= f.hidden_field :representative, value:distributed.representative %>
-      <% end %>
-
-    <% end %>
-</div>
-  <% end %>
-<%= submit_tag 'Save Changes', class: "btn btn-sm btn-primary" %>
-</div></div>
-
-</div>
+  <div class="distbox shift9-00">Sun 8/19 E</div>
+  <div class="distbox shift9-01">&nbsp;</div>
+  <div class="distbox shift9-02">&nbsp;</div>
+  <div class="distbox shift9-03">&nbsp;</div>
+  <div class="distbox shift9-04">&nbsp;</div>
+  <div class="distbox shift9-05">&nbsp;</div>
+  <div class="distbox shift9-06">&nbsp;</div>
+  <div class="distbox shift9-07">&nbsp;</div>
+  <div class="distbox shift9-08">&nbsp;</div>
+  <div class="distbox shift9-09">&nbsp;</div>
 </div>

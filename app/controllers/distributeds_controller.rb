@@ -173,6 +173,7 @@ class DistributedsController < ApplicationController
           if myparam[:id].to_i == 0 then
             puts "new " + myparam[:quantity].to_s
             obj = Distributed.new(myparam)
+            puts obj
             obj.save
           else
             puts "update " + myparam[:quantity].to_s
@@ -190,7 +191,7 @@ class DistributedsController < ApplicationController
     end
     puts " _____________"
     # redirect_to distributeds_path
-    redirect_to new_distributed_path(params.merge(:mystart => params[:mystart], :performance_id => myparam[:performance_id]))
+    redirect_to new_distributed_path
 
   end
 

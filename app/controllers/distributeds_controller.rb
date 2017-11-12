@@ -164,25 +164,33 @@ class DistributedsController < ApplicationController
 
 
   def create
+    params.permit!
     puts "Trial by fire _____________"
     params.each do |key, value|
       if key[0..3] == "dist" then
-        if params[key][:quantity] != 0 then
-          if params[key][:id] == 0 then
-            puts "new " + params[key][:quantity].to_s
-            params[key].save
+        myparam = params[key]
+        if myparam[:quantity].to_i != 0 then
+          if myparam[:id].to_i == 0 then
+            puts "new " + myparam[:quantity].to_s
+            obj = Distributed.new(myparam)
+            obj.save
           else
-            puts "upadate " + params[key][:quantity].to_s
-            params[key].update
+            puts "update " + myparam[:quantity].to_s
+            obj = Distributed.find(myparam[:id].to_i)
+            obj.update_attributes(myparam)
+          end
+        else #quantity is null or zero
+          if myparam[:id].to_i != 0 then
+            obj = Distributed.find(myparam[:id].to_i)
+            obj.destroy
           end
         end
 
       end
     end
     puts " _____________"
-    redirect_to distributeds_path
-
-    # {"utf8"=>"✓", "authenticity_token"=>"VhcUH8LXHZzjcDyo0j64feRDlUqIyeXpO86OJZ06Obbm7SThO31K6/mltVC2h2mwuqyUJ1hJO03f0+itAnLdpg==", "commit"=>"Save", "distributed"=>{"id"=>"0", "curtain"=>"2017-03-12 00:00:00 UTC", "eve"=>"true", "performance_id"=>"75", "product_id"=>"4", "language"=>"8", "quantity"=>""}, "id"=>"1", "method"=>"post", "mystart"=>"2017-03-06T00:00:00+00:00", "controller"=>"distributeds", "action"=>"create"}
+    # redirect_to distributeds_path
+    redirect_to new_distributed_path(params.merge(:mystart => params[:mystart], :performance_id => myparam[:performance_id]))
 
   end
 

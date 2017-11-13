@@ -10,15 +10,18 @@ class DistributedsController < ApplicationController
 
     @weekof = @mystart.strftime('%b %d') + ' to ' + (@mystart + 6).strftime('%b %d, %Y')
 
-    @showstoedit = []
+    @showstoedit = {}
     performances = Performance.showinglist(@mystart)
     performances.each do |p|
       mycount = Distributed.datespan(@mystart, (@mystart+7)).where('performance_id = ?', p.id).count
+      @showstoedit[p.id] = {name: p.name[0..16],
+        extraparams: { mystart: @mystart, performance_id: p.id }}        
       if mycount != 0 then
-        @showstoedit.push([p.name[0..16],p.id,"btn btn-sm btn-primary"])
+        @showstoedit[p.id][:class] = "btn btn-sm btn-primary"
       else
-        @showstoedit.push([p.name[0..16],p.id,"btn btn-sm btn-danger"])
+        @showstoedit[p.id][:class] = "btn btn-sm btn-danger"
       end
+
     end
 
     #Display where the data is at - overview of what has been entered
@@ -40,7 +43,7 @@ class DistributedsController < ApplicationController
       # myscanscount = Scan.scanscount(mystart)
       # myssscanscount = Scan.ssscanscount(mystart)
 
-      if myinfraredcount == 0 then #&& myspecialservicescount == 0 then
+      if myinfraredcount == 0 then
         mybuttonclass = "btn btn-sm btn-danger"
       else
         if myinfraredcount < myshowcount then
@@ -50,10 +53,10 @@ class DistributedsController < ApplicationController
         end
       end
 
-      @weektoedit.push({"showweekof" => mystart.strftime('%b %d')+" to "+ (mystart+7).strftime('%b %d, %Y'),
-        "startdate" => mystart,
-        "infraredcount" => myinfraredcount,
-        "buttonclass" => mybuttonclass})
+      @weektoedit.push({:showweekof => mystart.strftime('%b %d')+" to "+ (mystart+7).strftime('%b %d, %Y'),
+        :startdate => mystart,
+        :infraredcount => myinfraredcount,
+        :buttonclass => mybuttonclass})
     end
   end
 
@@ -165,22 +168,24 @@ class DistributedsController < ApplicationController
 
   def create
     params.permit!
-    puts "Trial by fire _____________"
+
+    puts "RESPONSE_____________"
     params.each do |key, value|
       if key[0..3] == "dist" then
         myparam = params[key]
-        if myparam[:quantity].to_i != 0 then
+        puts key
+        if myparam[:quantity] != '' then
           if myparam[:id].to_i == 0 then
             puts "new " + myparam[:quantity].to_s
+            myparam.delete(:id)
             obj = Distributed.new(myparam)
-            puts obj
             obj.save
           else
             puts "update " + myparam[:quantity].to_s
             obj = Distributed.find(myparam[:id].to_i)
             obj.update_attributes(myparam)
           end
-        else #quantity is null or zero
+        else #quantity is null
           if myparam[:id].to_i != 0 then
             obj = Distributed.find(myparam[:id].to_i)
             obj.destroy
@@ -189,9 +194,8 @@ class DistributedsController < ApplicationController
 
       end
     end
-    puts " _____________"
-    # redirect_to distributeds_path
-    redirect_to new_distributed_path
+    puts "AND OUT__________________________"
+    redirect_to distributeds_path
 
   end
 

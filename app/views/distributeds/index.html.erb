@@ -4,30 +4,29 @@
 <div class="col-md-12 editbold ct">Select a Show to add distribution:</div>
 
 <div class="distpickcontainer">
-  <% @showstoedit.each_with_index do |p,i| %>
+  <% @showstoedit.each do |key, show| %>
   <div class="distpickbox">
-    <% if !findlog(@mystart, p[1], 1).nil? then %>
+    <% if !findlog(@mystart, key, 1).nil? then %>
       <%= image_tag "scan.png" %>
     <% else %>
       <%= image_tag "noscan.png" %>
     <% end %>
-    <%= link_to p[0], new_distributed_path(params.merge(:mystart => params[:mystart],
-      :performance_id => p[1])),
-      :class => p[2], :style => 'width: 10em;' %>
+    <%= link_to show[:name], new_distributed_path(show[:extraparams]),
+      class: show[:class], style: 'width: 10em;' %>
   </div>
   <% end %>
 </div>
 
 <div class="distinfocontainer">
-  <div class="distpickbox"><%= link_to '2 mo', distributeds_path(params.merge(:myweekslist => 8)),
+  <div class="distpickbox"><%= link_to '2 mo', distributeds_path(myweekslist: 8),
     class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
-  <div class="distpickbox"><%= link_to '6 mo', distributeds_path(params.merge(:myweekslist => 24)),
+  <div class="distpickbox"><%= link_to '6 mo', distributeds_path(myweekslist: 24),
     class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
-  <div class="distpickbox"><%= link_to '1 yr', distributeds_path(params.merge(:myweekslist => 52)),
+  <div class="distpickbox"><%= link_to '1 yr', distributeds_path(myweekslist: 52),
     class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
-  <div class="distpickbox"><%= link_to '3 yrs', distributeds_path(params.merge(:myweekslist => 156)),
+  <div class="distpickbox"><%= link_to '3 yrs', distributeds_path(myweekslist: 156),
     class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
-  <div class="distpickbox"><%= link_to '5 yrs', distributeds_path(params.merge(:myweekslist => 260)),
+  <div class="distpickbox"><%= link_to '5 yrs', distributeds_path(myweekslist: 260),
     class: "btn btn-sm btn-primary", :style => 'width: 5em;' %></div>
   <div class="distpickbox">&nbsp;</div>
   <div class="distpickbox"><%= link_to "Empty", distributeds_path, class: "btn btn-sm btn-danger", :style => 'width: 8em;' %></div>
@@ -38,9 +37,9 @@
 <div class="distpickcontainer">
   <% @weektoedit.each do |weekof| %>
   <div class="distpickbox">
-    <%= link_to weekof["showweekof"],
-      distributeds_path(params.merge(:mystart => weekof["startdate"])),
-      class: weekof["buttonclass"], :style => 'width: 14em;' %>
+    <%= link_to weekof[:showweekof],
+      distributeds_path(mystart: weekof[:startdate]),
+      class: weekof[:buttonclass], :style => 'width: 14em;' %>
   </div>
   <% end %>
 </div>
